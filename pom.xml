@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
-        <groupId>com.buschmais.jqassistant.plugin</groupId>
-        <artifactId>jqassistant.plugin</artifactId>
-        <version>1.2.0-SNAPSHOT</version>
+      <groupId>com.buschmais.jqassistant</groupId>
+      <artifactId>jqassistant.plugin.plugin-parent</artifactId>
+      <version>1.2.0-SNAPSHOT</version>
     </parent>
 
+    <groupId>com.buschmais.jqassistant.plugin</groupId>
     <artifactId>jqassistant.plugin.graphml</artifactId>
 
     <build>
@@ -42,18 +44,6 @@
         </plugins>
     </build>
 
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.buschmais.jqassistant.plugin</groupId>
-                <artifactId>jqassistant.plugin.bom</artifactId>
-                <type>pom</type>
-                <scope>import</scope>
-                <version>${project.version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
     <dependencies>
         <dependency>
             <groupId>com.buschmais.jqassistant.core</groupId>
@@ -64,12 +54,14 @@
             <artifactId>jqassistant.plugin.common</artifactId>
             <type>xsl</type>
             <classifier>plugin2asciidoc</classifier>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.buschmais.jqassistant.plugin</groupId>
             <artifactId>jqassistant.plugin.common</artifactId>
             <type>xsl</type>
             <classifier>rules2asciidoc-v2</classifier>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.buschmais.jqassistant.core</groupId>
@@ -85,11 +77,13 @@
             <groupId>com.buschmais.jqassistant.plugin</groupId>
             <artifactId>jqassistant.plugin.java</artifactId>
             <scope>test</scope>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.buschmais.jqassistant.plugin</groupId>
             <artifactId>jqassistant.plugin.common</artifactId>
             <type>test-jar</type>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.buschmais.jqassistant.core</groupId>
@@ -105,6 +99,7 @@
             <groupId>com.buschmais.jqassistant.plugin</groupId>
             <artifactId>jqassistant.plugin.java</artifactId>
             <type>test-jar</type>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hamcrest</groupId>
