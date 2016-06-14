@@ -77,7 +77,7 @@
         </dependency>
         <dependency>
             <groupId>com.buschmais.jqassistant.plugin</groupId>
-            <artifactId>jqassistant.plugin.java</artifactId>
+            <artifactId>java</artifactId>
             <scope>test</scope>
             <version>${project.version}</version>
         </dependency>
@@ -99,7 +99,7 @@
         </dependency>
         <dependency>
             <groupId>com.buschmais.jqassistant.plugin</groupId>
-            <artifactId>jqassistant.plugin.java</artifactId>
+            <artifactId>java</artifactId>
             <type>test-jar</type>
             <version>${project.version}</version>
         </dependency>
