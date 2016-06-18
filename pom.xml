@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>com.buschmais.jqassistant.plugin</groupId>
-    <artifactId>jqassistant.plugin.graphml</artifactId>
+    <artifactId>graphml</artifactId>
 
     <build>
         <plugins>
