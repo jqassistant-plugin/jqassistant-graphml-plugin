@@ -1,20 +1,20 @@
 package com.buschmais.jqassistant.plugin.graphml.report.api;
 
-import java.io.Closeable;
-import java.io.File;
-import java.util.Map;
-
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamWriter;
-
 import com.buschmais.jqassistant.core.analysis.api.Result;
 import com.buschmais.jqassistant.core.store.api.model.SubGraph;
 import com.buschmais.xo.api.CompositeObject;
 
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamWriter;
+import java.io.Closeable;
+import java.io.File;
+import java.util.Map;
+
 /**
  * Defines the interface for a GraphML decorator.
- * <p>
- * Provides methods that are called if elements for nodes or relationships are written which may be implemented for adding attributes or XML elements.
+ *
+ * Provides methods that are called if elements for nodes or relationships are written which may
+ * be implemented for adding attributes or XML elements.
  */
 public interface GraphMLDecorator extends Closeable {
 
@@ -44,8 +44,9 @@ public interface GraphMLDecorator extends Closeable {
     Map<String, String> getSchemaLocations();
 
     /**
-     * Writes a bunch of keys in the graphml-Tag that will be used for formating or so. This method can be overwritten if any special default keys are
-     * necessary. Please call super to ensure all needed keys will be created.
+     * Writes a bunch of keys in the graphml-Tag that will be used for formating or so. This method
+     * can be overwritten if any special default keys are necessary. Please call super to ensure all
+     * needed keys will be created.
      *
      * @throws XMLStreamException If writing fails.
      */
