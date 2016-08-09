@@ -12,6 +12,7 @@
 
     <groupId>com.buschmais.jqassistant.plugin</groupId>
     <artifactId>graphml</artifactId>
+    <name>jQAssistant GraphML Plugin</name>
 
     <build>
         <plugins>
