@@ -15,6 +15,13 @@
     <version>1.2-SNAPSHOT</version>
 
     <name>jQAssistant GraphML Plugin</name>
+    <url>http://jqassistant.org/</url>
+
+    <description>
+        Plugin for jQAssistant to be able to generate
+        GraphML diagrams.
+    </description>
+
 
     <licenses>
         <license>
