@@ -35,6 +35,12 @@
         <jqa-java-plugin.version>1.2-SNAPSHOT</jqa-java-plugin.version>
     </properties>
 
+    <scm>
+        <connection>scm:git:git@github.com:buschmais/jqa-graphml-plugin.git</connection>
+        <developerConnection>scm:git:git@github.com:buschmais/jqa-graphml-plugin.git</developerConnection>
+        <url>https://github.com/buschmais/jqa-graphml-plugin</url>
+    </scm>
+
     <build>
         <plugins></plugins>
     </build>
