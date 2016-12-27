@@ -2,4 +2,4 @@
 
 - Maven coordinates changed from `com.buschmais.jqassistant.plugin:jqassistant.plugin.graphml`
   to `com.buschmais.jqassistant.plugin:graphml`.
-- Fixed a bug where sub graphs have not been evaluated properly
+- Fixed a bug where sub graphs have not been evaluated properly.
