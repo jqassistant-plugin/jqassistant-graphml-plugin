@@ -10,7 +10,7 @@
 
     <groupId>com.buschmais.jqassistant.plugin</groupId>
     <artifactId>graphml</artifactId>
-    <version>1.2</version>
+    <version>1.3-SNAPSHOT</version>
 
     <name>jQAssistant GraphML Plugin</name>
     <url>http://jqassistant.org/</url>
@@ -37,7 +37,7 @@
         <connection>scm:git:git@github.com:buschmais/jqa-graphml-plugin.git</connection>
         <developerConnection>scm:git:git@github.com:buschmais/jqa-graphml-plugin.git</developerConnection>
         <url>https://github.com/buschmais/jqa-graphml-plugin</url>
-      <tag>1.2</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <build>
