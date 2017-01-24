@@ -1,13 +1,13 @@
 package com.buschmais.jqassistant.plugin.graphml.report.impl;
 
+import static java.util.Arrays.asList;
+
 import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
-import org.neo4j.graphdb.Label;
-import org.neo4j.graphdb.Node;
 
-import static java.util.Arrays.asList;
+import com.buschmais.jqassistant.plugin.graphml.report.api.GraphMLNode;
 
 /**
  * @author mh
@@ -43,16 +43,11 @@ public class MetaInformation {
         return null;
     }
 
-    public static String getLabelsString(Node node) {
-        Set<String> labels = new HashSet<>();
-        for (Label l : node.getLabels()) {
-            labels.add(l.name());
-        }
-
-        if (labels.isEmpty()) {
+    public static String getLabelsString(GraphMLNode node) {
+        if (node.getLabels().isEmpty()) {
             return StringUtils.EMPTY;
         } else {
-            return ":" + StringUtils.join(labels.iterator(), ":");
+            return ":" + StringUtils.join(node.getLabels().iterator(), ":");
         }
     }
 

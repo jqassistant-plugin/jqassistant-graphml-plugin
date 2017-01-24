@@ -1,14 +1,13 @@
 package com.buschmais.jqassistant.plugin.graphml.report.api;
 
-import com.buschmais.jqassistant.core.analysis.api.Result;
-import com.buschmais.jqassistant.core.store.api.model.SubGraph;
-import com.buschmais.xo.api.CompositeObject;
-
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamWriter;
 import java.io.Closeable;
 import java.io.File;
 import java.util.Map;
+
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamWriter;
+
+import com.buschmais.jqassistant.core.analysis.api.Result;
 
 /**
  * Defines the interface for a GraphML decorator.
@@ -27,7 +26,7 @@ public interface GraphMLDecorator extends Closeable {
      * @param file       The output file.
      * @param properties The properties from the GraphML plugin configuration.
      */
-    void initialize(Result<?> result, SubGraph subGraph, XMLStreamWriter xmlWriter, File file, Map<String, Object> properties);
+    void initialize(Result<?> result, GraphMLSubGraph subGraph, XMLStreamWriter xmlWriter, File file, Map<String, Object> properties);
 
     /**
      * Return the additional namespaces identified by their prefixes which are used by the decorator.
@@ -58,7 +57,7 @@ public interface GraphMLDecorator extends Closeable {
      * @param node The node.
      * @return <code>true</code> if the node shall be written.
      */
-    boolean isWriteNode(CompositeObject node);
+    boolean isWriteNode(GraphMLNode node);
 
     /**
      * Add node attributes.
@@ -66,7 +65,7 @@ public interface GraphMLDecorator extends Closeable {
      * @param node the node
      * @throws XMLStreamException
      */
-    void writeNodeAttributes(CompositeObject node) throws XMLStreamException;
+    void writeNodeAttributes(GraphMLNode node) throws XMLStreamException;
 
     /**
      * Add elements inside a node-element.
@@ -74,7 +73,7 @@ public interface GraphMLDecorator extends Closeable {
      * @param node the node
      * @throws XMLStreamException
      */
-    void writeNodeElements(CompositeObject node) throws XMLStreamException;
+    void writeNodeElements(GraphMLNode node) throws XMLStreamException;
 
     /**
      * Determine if a relationship shall be written.
@@ -82,7 +81,7 @@ public interface GraphMLDecorator extends Closeable {
      * @param relationship The relationship.
      * @return <code>true</code> if the relationship shall be written.
      */
-    boolean isWriteRelationship(CompositeObject relationship);
+    boolean isWriteRelationship(GraphMLRelationship relationship);
 
     /**
      * Add relationship attributes.
@@ -90,7 +89,7 @@ public interface GraphMLDecorator extends Closeable {
      * @param relationship the relationship
      * @throws XMLStreamException
      */
-    void writeRelationshipAttributes(CompositeObject relationship) throws XMLStreamException;
+    void writeRelationshipAttributes(GraphMLRelationship relationship) throws XMLStreamException;
 
     /**
      * Add elements inside a relationship-element.
@@ -98,7 +97,7 @@ public interface GraphMLDecorator extends Closeable {
      * @param relationship the relationship
      * @throws XMLStreamException
      */
-    void writeRelationshipElements(CompositeObject relationship) throws XMLStreamException;
+    void writeRelationshipElements(GraphMLRelationship relationship) throws XMLStreamException;
 
     /**
      * Finish writing the GraphML document.
