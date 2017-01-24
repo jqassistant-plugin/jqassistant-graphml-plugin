@@ -18,11 +18,11 @@ import org.mockito.runners.MockitoJUnitRunner;
 import com.buschmais.jqassistant.core.analysis.api.Result;
 import com.buschmais.jqassistant.core.analysis.api.rule.Concept;
 import com.buschmais.jqassistant.core.analysis.api.rule.Report;
+import com.buschmais.jqassistant.core.report.api.graph.model.Node;
+import com.buschmais.jqassistant.core.report.api.graph.model.Relationship;
+import com.buschmais.jqassistant.core.report.api.graph.model.SubGraph;
 import com.buschmais.jqassistant.core.shared.reflection.ClassHelper;
 import com.buschmais.jqassistant.plugin.graphml.report.api.GraphMLDecorator;
-import com.buschmais.jqassistant.plugin.graphml.report.api.GraphMLNode;
-import com.buschmais.jqassistant.plugin.graphml.report.api.GraphMLRelationship;
-import com.buschmais.jqassistant.plugin.graphml.report.api.GraphMLSubGraph;
 import com.buschmais.jqassistant.plugin.graphml.report.decorator.YedGraphMLDecorator;
 import com.buschmais.jqassistant.plugin.graphml.test.CustomGraphMLDecorator;
 
@@ -39,37 +39,37 @@ public class XmlGraphMLWriterTest {
     @Mock
     private Result<?> result;
 
-    private GraphMLNode node1;
+    private Node node1;
 
-    private GraphMLNode node2;
+    private Node node2;
 
-    private GraphMLRelationship relationship1;
+    private Relationship relationship1;
 
-    private GraphMLRelationship relationship2;
+    private Relationship relationship2;
 
-    private GraphMLSubGraph subGraph;
+    private SubGraph subGraph;
 
     @Before
     public void setUp() {
         when(result.getRule()).thenReturn(concept);
 
-        node1 = new GraphMLNode();
+        node1 = new Node();
         node1.setId(1);
-        relationship1 = new GraphMLRelationship();
+        relationship1 = new Relationship();
         relationship1.setId(1);
         relationship1.setType("TEST");
         relationship1.setStartNode(node1);
         relationship1.setEndNode(node1);
 
-        node2 = new GraphMLNode();
+        node2 = new Node();
         node2.setId(2);
-        relationship2 = new GraphMLRelationship();
+        relationship2 = new Relationship();
         relationship2.setId(2);
         relationship2.setType("TEST");
         relationship2.setStartNode(node2);
         relationship2.setEndNode(node2);
 
-        subGraph = new GraphMLSubGraph();
+        subGraph = new SubGraph();
         subGraph.getNodes().put(node1.getId(), node1);
         subGraph.getNodes().put(node2.getId(), node2);
         subGraph.getRelationships().put(relationship1.getId(), relationship1);

@@ -8,10 +8,10 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
 import com.buschmais.jqassistant.core.analysis.api.Result;
+import com.buschmais.jqassistant.core.report.api.graph.model.Node;
+import com.buschmais.jqassistant.core.report.api.graph.model.Relationship;
+import com.buschmais.jqassistant.core.report.api.graph.model.SubGraph;
 import com.buschmais.jqassistant.plugin.graphml.report.api.GraphMLDecorator;
-import com.buschmais.jqassistant.plugin.graphml.report.api.GraphMLNode;
-import com.buschmais.jqassistant.plugin.graphml.report.api.GraphMLRelationship;
-import com.buschmais.jqassistant.plugin.graphml.report.api.GraphMLSubGraph;
 
 /**
  * A GraphML decorator for yEd.
@@ -24,7 +24,7 @@ public class YedGraphMLDecorator implements GraphMLDecorator {
     private XMLStreamWriter writer;
 
     @Override
-    public void initialize(Result<?> result, GraphMLSubGraph subGraph, XMLStreamWriter xmlWriter, File file, Map<String, Object> properties) {
+    public void initialize(Result<?> result, SubGraph subGraph, XMLStreamWriter xmlWriter, File file, Map<String, Object> properties) {
         this.writer = xmlWriter;
     }
 
@@ -77,17 +77,17 @@ public class YedGraphMLDecorator implements GraphMLDecorator {
     }
 
     @Override
-    public boolean isWriteNode(GraphMLNode node) {
+    public boolean isWriteNode(Node node) {
         return true;
     }
 
     @Override
-    public void writeNodeAttributes(GraphMLNode node) throws XMLStreamException {
+    public void writeNodeAttributes(Node node) throws XMLStreamException {
         writer.writeAttribute("yfiles.foldertype", "folder");
     }
 
     @Override
-    public void writeNodeElements(GraphMLNode  node) throws XMLStreamException {
+    public void writeNodeElements(Node node) throws XMLStreamException {
         writer.writeStartElement("data");
         writer.writeAttribute("key", "d6");
         writer.writeStartElement(Y_NAMESPACE_URI, "ProxyAutoBoundsNode");
@@ -116,16 +116,16 @@ public class YedGraphMLDecorator implements GraphMLDecorator {
     }
 
     @Override
-    public boolean isWriteRelationship(GraphMLRelationship relationship) {
+    public boolean isWriteRelationship(Relationship relationship) {
         return true;
     }
 
     @Override
-    public void writeRelationshipAttributes(GraphMLRelationship relationship) throws XMLStreamException {
+    public void writeRelationshipAttributes(Relationship relationship) throws XMLStreamException {
     }
 
     @Override
-    public void writeRelationshipElements(GraphMLRelationship relationship) throws XMLStreamException {
+    public void writeRelationshipElements(Relationship relationship) throws XMLStreamException {
     }
 
     @Override

@@ -7,6 +7,8 @@ import java.util.Set;
 
 import javax.xml.stream.XMLStreamException;
 
+import com.buschmais.jqassistant.core.report.api.graph.SubGraphFactory;
+import com.buschmais.jqassistant.core.report.api.graph.model.SubGraph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -90,7 +92,7 @@ public class GraphMLReportPlugin implements ReportPlugin {
         Rule rule = result.getRule();
         Set<String> selectedReports = result.getRule().getReport().getSelectedTypes();
         if ((selectedReports != null && selectedReports.contains(GRAPHML)) || (rule instanceof Concept && rule.getId().matches(conceptPattern))) {
-            GraphMLSubGraph subGraph = subGraphFactory.createSubGraph(result);
+            SubGraph subGraph = subGraphFactory.createSubGraph(result);
             try {
                 String fileName = rule.getId().replaceAll("\\:", "_");
                 if (!fileName.endsWith(FILEEXTENSION_GRAPHML)) {

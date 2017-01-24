@@ -7,7 +7,7 @@ import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.buschmais.jqassistant.plugin.graphml.report.api.GraphMLNode;
+import com.buschmais.jqassistant.core.report.api.graph.model.Node;
 
 /**
  * @author mh
@@ -43,7 +43,7 @@ public class MetaInformation {
         return null;
     }
 
-    public static String getLabelsString(GraphMLNode node) {
+    public static String getLabelsString(Node node) {
         if (node.getLabels().isEmpty()) {
             return StringUtils.EMPTY;
         } else {
