@@ -79,7 +79,7 @@ public final class SubGraphFactory {
                         Collection<String> labels = (Collection<String>) virtualObject.get(LABELS);
                         node.getLabels().addAll(labels);
                         node.getProperties().putAll(properties);
-                        node.setLabel((String) virtualObject.get("label"));
+                        node.setLabel((String) virtualObject.get(LABEL));
                         return (I) node;
                     case RELATIONSHIP:
                         GraphMLRelationship relationship = new GraphMLRelationship();
