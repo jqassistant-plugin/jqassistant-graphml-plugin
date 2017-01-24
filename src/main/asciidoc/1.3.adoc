@@ -1,0 +1,5 @@
+== jQAssistant GraphML Plugin Version 1.3
+
+- Added support for nested sub graphs
+- Refactoring of internal graph representation to enable compatibility with newer Neo4j versions
+

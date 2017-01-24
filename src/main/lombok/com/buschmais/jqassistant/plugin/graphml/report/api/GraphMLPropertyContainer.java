@@ -4,11 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
+@Getter
+@Setter
+@ToString(callSuper = true)
 public abstract class GraphMLPropertyContainer extends Identifiable {
-
-    private String label;
 
     private Map<String,Object> properties = new HashMap<>();
 

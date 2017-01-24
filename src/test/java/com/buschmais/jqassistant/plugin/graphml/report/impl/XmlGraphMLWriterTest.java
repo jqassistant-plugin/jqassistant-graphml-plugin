@@ -4,7 +4,6 @@ import static org.mockito.Mockito.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,6 +26,7 @@ import com.buschmais.jqassistant.plugin.graphml.report.api.GraphMLSubGraph;
 import com.buschmais.jqassistant.plugin.graphml.report.decorator.YedGraphMLDecorator;
 import com.buschmais.jqassistant.plugin.graphml.test.CustomGraphMLDecorator;
 
+
 @RunWith(MockitoJUnitRunner.class)
 public class XmlGraphMLWriterTest {
 
@@ -39,46 +39,41 @@ public class XmlGraphMLWriterTest {
     @Mock
     private Result<?> result;
 
-    @Mock
-    private GraphMLNode nodeObject1;
+    private GraphMLNode node1;
 
-    @Mock
-    private GraphMLNode nodeObject2;
+    private GraphMLNode node2;
 
-    @Mock
-    private GraphMLRelationship relationshipObject1;
+    private GraphMLRelationship relationship1;
 
-    @Mock
-    private GraphMLRelationship relationshipObject2;
+    private GraphMLRelationship relationship2;
+
+    private GraphMLSubGraph subGraph;
 
     @Before
     public void setUp() {
         when(result.getRule()).thenReturn(concept);
 
-        GraphMLNode node1 = stubNode();
-        when(nodeObject1.getId()).thenReturn(1L);
-        GraphMLRelationship relationship1 = stubRelationship(node1);
-        when(relationshipObject1.getId()).thenReturn(1L);
-        GraphMLNode node2 = stubNode();
-        when(nodeObject2.getId()).thenReturn(2L);
-        when(relationshipObject2.getId()).thenReturn(2L);
-        GraphMLRelationship relationship2 = stubRelationship(node2);
-    }
+        node1 = new GraphMLNode();
+        node1.setId(1);
+        relationship1 = new GraphMLRelationship();
+        relationship1.setId(1);
+        relationship1.setType("TEST");
+        relationship1.setStartNode(node1);
+        relationship1.setEndNode(node1);
 
-    private GraphMLRelationship stubRelationship(GraphMLNode node) {
-        GraphMLRelationship relationship = mock(GraphMLRelationship.class);
-        when(relationship.getType()).thenReturn("TEST");
-        when(relationship.getProperties()).thenReturn(Collections.<String, Object>emptyMap());
-        when(relationship.getStartNode()).thenReturn(node);
-        when(relationship.getEndNode()).thenReturn(node);
-        return relationship;
-    }
+        node2 = new GraphMLNode();
+        node2.setId(2);
+        relationship2 = new GraphMLRelationship();
+        relationship2.setId(2);
+        relationship2.setType("TEST");
+        relationship2.setStartNode(node2);
+        relationship2.setEndNode(node2);
 
-    private GraphMLNode stubNode() {
-        GraphMLNode node = mock(GraphMLNode.class);
-        when(node.getProperties()).thenReturn(Collections.<String, Object>emptyMap());
-        when(node.getLabels()).thenReturn(Collections.<String>emptySet());
-        return node;
+        subGraph = new GraphMLSubGraph();
+        subGraph.getNodes().put(node1.getId(), node1);
+        subGraph.getNodes().put(node2.getId(), node2);
+        subGraph.getRelationships().put(relationship1.getId(), relationship1);
+        subGraph.getRelationships().put(relationship2.getId(), relationship2);
     }
 
     @Test
@@ -88,7 +83,6 @@ public class XmlGraphMLWriterTest {
         File file = getFile();
         Map<String, Object> properties = new HashMap<>();
         XmlGraphMLWriter writer = new XmlGraphMLWriter(classHelper, YedGraphMLDecorator.class, properties);
-        GraphMLSubGraph subGraph = getSubGraph();
 
         writer.write(result, subGraph, file);
 
@@ -103,7 +97,6 @@ public class XmlGraphMLWriterTest {
         File file = getFile();
         Map<String, Object> properties = new HashMap<>();
         XmlGraphMLWriter writer = new XmlGraphMLWriter(classHelper, YedGraphMLDecorator.class, properties);
-        GraphMLSubGraph subGraph = getSubGraph();
 
         writer.write(result, subGraph, file);
 
@@ -114,30 +107,29 @@ public class XmlGraphMLWriterTest {
     public void decoratorFilter() throws IOException, XMLStreamException {
         Report report = Report.Builder.newInstance().get();
         YedGraphMLDecorator decorator = stubDecorator(report, YedGraphMLDecorator.class);
-        when(decorator.isWriteNode(nodeObject1)).thenReturn(true);
-        when(decorator.isWriteRelationship(relationshipObject1)).thenReturn(true);
-        when(decorator.isWriteNode(nodeObject2)).thenReturn(false);
-        when(decorator.isWriteRelationship(relationshipObject2)).thenReturn(false);
+        when(decorator.isWriteNode(node1)).thenReturn(true);
+        when(decorator.isWriteRelationship(relationship1)).thenReturn(true);
+        when(decorator.isWriteNode(node2)).thenReturn(false);
+        when(decorator.isWriteRelationship(relationship2)).thenReturn(false);
         File file = getFile();
         Map<String, Object> properties = new HashMap<>();
         XmlGraphMLWriter writer = new XmlGraphMLWriter(classHelper, YedGraphMLDecorator.class, properties);
-        GraphMLSubGraph subGraph = getSubGraph();
 
         writer.write(result, subGraph, file);
 
-        verify(decorator).isWriteNode(nodeObject1);
-        verify(decorator).writeNodeAttributes(nodeObject1);
-        verify(decorator).writeNodeElements(nodeObject1);
-        verify(decorator).isWriteRelationship(relationshipObject1);
-        verify(decorator).writeRelationshipAttributes(relationshipObject1);
-        verify(decorator).writeRelationshipElements(relationshipObject1);
+        verify(decorator).isWriteNode(node1);
+        verify(decorator).writeNodeAttributes(node1);
+        verify(decorator).writeNodeElements(node1);
+        verify(decorator).isWriteRelationship(relationship1);
+        verify(decorator).writeRelationshipAttributes(relationship1);
+        verify(decorator).writeRelationshipElements(relationship1);
 
-        verify(decorator).isWriteNode(nodeObject2);
-        verify(decorator, never()).writeNodeAttributes(nodeObject2);
-        verify(decorator, never()).writeNodeElements(nodeObject2);
-        verify(decorator).isWriteRelationship(relationshipObject2);
-        verify(decorator, never()).writeRelationshipAttributes(relationshipObject2);
-        verify(decorator, never()).writeRelationshipElements(relationshipObject2);
+        verify(decorator).isWriteNode(node2);
+        verify(decorator, never()).writeNodeAttributes(node2);
+        verify(decorator, never()).writeNodeElements(node2);
+        verify(decorator).isWriteRelationship(relationship2);
+        verify(decorator, never()).writeRelationshipAttributes(relationship2);
+        verify(decorator, never()).writeRelationshipElements(relationship2);
     }
 
     private <T extends GraphMLDecorator> T stubDecorator(Report report, Class<T> decoratorClass) {
@@ -154,12 +146,4 @@ public class XmlGraphMLWriterTest {
         return file;
     }
 
-    private GraphMLSubGraph getSubGraph() {
-        GraphMLSubGraph subGraph = new GraphMLSubGraph();
-        subGraph.getNodes().put(nodeObject1.getId(), nodeObject1);
-        subGraph.getNodes().put(nodeObject2.getId(), nodeObject2);
-        subGraph.getRelationships().put(relationshipObject1.getId(), relationshipObject1);
-        subGraph.getRelationships().put(relationshipObject2.getId(), relationshipObject2);
-        return subGraph;
-    }
 }

@@ -279,25 +279,25 @@ class XmlGraphMLWriter {
     }
 
     private Collection<GraphMLNode> getAllNodes(GraphMLSubGraph graph) {
-        Set<GraphMLNode> allNodes = new LinkedHashSet<>();
+        Map<Long, GraphMLNode> allNodes = new LinkedHashMap<>();
         GraphMLNode parentNode = graph.getParent();
         if (parentNode != null) {
-            allNodes.add(parentNode);
+            allNodes.put(parentNode.getId(), parentNode);
         }
-        allNodes.addAll(graph.getNodes().values());
+        allNodes.putAll(graph.getNodes());
         for (GraphMLSubGraph subgraph : graph.getSubGraphs().values()) {
-            allNodes.addAll(subgraph.getNodes().values());
+            allNodes.putAll(subgraph.getNodes());
         }
-        return allNodes;
+        return allNodes.values();
     }
 
     private Collection<GraphMLRelationship> getAllRelationships(GraphMLSubGraph graph) {
-        Set<GraphMLRelationship> allRels = new LinkedHashSet<>();
-        allRels.addAll(graph.getRelationships().values());
+        Map<Long, GraphMLRelationship> allRels = new LinkedHashMap<>();
+        allRels.putAll(graph.getRelationships());
         for (GraphMLSubGraph subgraph : graph.getSubGraphs().values()) {
-            allRels.addAll(subgraph.getRelationships().values());
+            allRels.putAll(subgraph.getRelationships());
         }
-        return allRels;
+        return allRels.values();
     }
 
 }

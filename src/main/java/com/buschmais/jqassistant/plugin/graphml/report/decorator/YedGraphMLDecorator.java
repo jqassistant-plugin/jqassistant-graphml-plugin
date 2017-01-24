@@ -8,7 +8,6 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
 import com.buschmais.jqassistant.core.analysis.api.Result;
-import com.buschmais.jqassistant.core.report.api.ReportHelper;
 import com.buschmais.jqassistant.plugin.graphml.report.api.GraphMLDecorator;
 import com.buschmais.jqassistant.plugin.graphml.report.api.GraphMLNode;
 import com.buschmais.jqassistant.plugin.graphml.report.api.GraphMLRelationship;
@@ -94,20 +93,22 @@ public class YedGraphMLDecorator implements GraphMLDecorator {
         writer.writeStartElement(Y_NAMESPACE_URI, "ProxyAutoBoundsNode");
         writer.writeStartElement(Y_NAMESPACE_URI, "Realizers");
         writer.writeAttribute("active", "1");
-        Insets borderInsets = new Insets();
-        borderInsets.bottom = 14;
-        borderInsets.top = 5;
-        borderInsets.left = 51;
-        borderInsets.right = 49;
 
-        borderInsets.bottomF = 14.0F;
-        borderInsets.topF = 4.7470703125F;
-        borderInsets.leftF = 50.5F;
-        borderInsets.rightF = 48.9443359375F;
+        String label = node.getLabel();
+        if (label != null) {
+            Insets borderInsets = new Insets();
+            borderInsets.bottom = 15;
+            borderInsets.top = 5;
+            borderInsets.left = 50;
+            borderInsets.right = 50;
 
-        String nodeLabel = ReportHelper.getLabel(node);
-        writeGroupNodeElement(writer, nodeLabel, false, borderInsets);
-        writeGroupNodeElement(writer, nodeLabel, true, new Insets());
+            borderInsets.bottomF = 15F;
+            borderInsets.topF = 5F;
+            borderInsets.leftF = 50F;
+            borderInsets.rightF = 50F;
+            writeGroupNodeElement(writer, label, false, borderInsets);
+            writeGroupNodeElement(writer, label, true, new Insets());
+        }
 
         writer.writeEndElement();
         writer.writeEndElement();
