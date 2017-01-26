@@ -1,15 +1,15 @@
 package com.buschmais.jqassistant.plugin.graphml.test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.FileReader;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -18,11 +18,6 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
-import org.apache.commons.lang.ArrayUtils;
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.Matcher;
-import org.hamcrest.Matchers;
-import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,10 +26,10 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
-import com.buschmais.jqassistant.core.analysis.api.AnalysisListener;
 import com.buschmais.jqassistant.core.analysis.api.AnalyzerConfiguration;
 import com.buschmais.jqassistant.core.analysis.impl.AnalyzerImpl;
-import com.buschmais.jqassistant.core.report.impl.CompositeReportWriter;
+import com.buschmais.jqassistant.core.report.api.ReportPlugin;
+import com.buschmais.jqassistant.core.report.impl.CompositeReportPlugin;
 import com.buschmais.jqassistant.plugin.graphml.report.impl.GraphMLReportPlugin;
 import com.buschmais.jqassistant.plugin.graphml.test.set.a.A;
 import com.buschmais.jqassistant.plugin.graphml.test.set.b.B;
@@ -171,10 +166,10 @@ public class GraphMLReportPluginIT extends AbstractJavaPluginIT {
 
     private Document scanAndWriteReport(String conceptName, Class<?>... scanClasses)
             throws Exception {
-        Map<String, AnalysisListener> reportWriters = new HashMap<>();
+        Map<String, ReportPlugin> reportWriters = new HashMap<>();
         reportWriters.putAll(getReportPlugins(getReportProperties()));
-        CompositeReportWriter compositeReportWriter = new CompositeReportWriter(reportWriters);
-        this.analyzer = new AnalyzerImpl(new AnalyzerConfiguration(), this.store, compositeReportWriter, LOGGER);
+        CompositeReportPlugin compositeReportPlugin = new CompositeReportPlugin(reportWriters);
+        this.analyzer = new AnalyzerImpl(new AnalyzerConfiguration(), this.store, compositeReportPlugin, LOGGER);
         scanClasses(scanClasses);
         applyConcept(conceptName);
         String fileName = conceptName.replace(':', '_');
