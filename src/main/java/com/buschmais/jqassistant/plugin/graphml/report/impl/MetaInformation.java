@@ -5,8 +5,6 @@ import static java.util.Arrays.asList;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.apache.commons.lang.StringUtils;
-
 import com.buschmais.jqassistant.core.report.api.graph.model.Node;
 
 /**
@@ -45,9 +43,13 @@ public class MetaInformation {
 
     public static String getLabelsString(Node node) {
         if (node.getLabels().isEmpty()) {
-            return StringUtils.EMPTY;
+            return "";
         } else {
-            return ":" + StringUtils.join(node.getLabels().iterator(), ":");
+            StringBuilder labels = new StringBuilder();
+            for (String label : node.getLabels()) {
+                labels.append(':').append(label);
+            }
+            return labels.toString();
         }
     }
 
