@@ -1,6 +1,7 @@
 package com.buschmais.jqassistant.plugin.graphml.test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertThat;
 
 import java.io.File;
@@ -87,7 +88,8 @@ public class GraphMLReportPluginIT extends AbstractJavaPluginIT {
         Document doc = scanAndWriteReport("test:DeclaredMembersWithSubgraph.graphml", A.class, B.class);
         XPathFactory xPathfactory = XPathFactory.newInstance();
         XPath xpath = xPathfactory.newXPath();
-//        XPathExpression classExpression = xpath.compile("/graphml/graph/node[contains(@labels,':Class')]/data[@key='fqn']");
+        // XPathExpression classExpression =
+        // xpath.compile("/graphml/graph/node[contains(@labels,':Class')]/data[@key='fqn']");
         XPathExpression classExpression = xpath.compile("/graphml/graph/node[contains(@labels,':Class')]");
         XPathExpression methodExpression = xpath.compile("graph/node[contains(@labels,':Method')]");
         XPathExpression fqnExpression = xpath.compile("data[@key='fqn']");
@@ -159,13 +161,19 @@ public class GraphMLReportPluginIT extends AbstractJavaPluginIT {
         XPathExpression classExpression = xpath.compile("/graphml/graph/node[contains(@labels,':Class')]/data[@key='fqn']");
         String fqn = classExpression.evaluate(doc);
         assertThat(fqn, equalTo(TestClass.class.getName()));
+        XPathExpression labelExpression = xpath
+                .compile("/graphml/graph/node[contains(@labels,':Class')]/data/ProxyAutoBoundsNode/Realizers/GroupNode/NodeLabel");
+        NodeList labels = (NodeList) labelExpression.evaluate(doc, XPathConstants.NODESET);
+        assertThat(labels.getLength(), greaterThan(0));
+        for (int i = 0; i < labels.getLength(); i++) {
+            assertThat(labels.item(0).getFirstChild().getTextContent().length(), greaterThan(0));
+        }
         XPathExpression declaresExpression = xpath.compile("//edge");
         NodeList edges = (NodeList) declaresExpression.evaluate(doc, XPathConstants.NODESET);
         assertThat(edges.getLength(), equalTo(assertedEdges));
     }
 
-    private Document scanAndWriteReport(String conceptName, Class<?>... scanClasses)
-            throws Exception {
+    private Document scanAndWriteReport(String conceptName, Class<?>... scanClasses) throws Exception {
         Map<String, ReportPlugin> reportWriters = new HashMap<>();
         reportWriters.putAll(getReportPlugins(getReportProperties()));
         CompositeReportPlugin compositeReportPlugin = new CompositeReportPlugin(reportWriters);
