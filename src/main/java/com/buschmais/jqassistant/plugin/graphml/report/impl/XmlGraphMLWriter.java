@@ -1,12 +1,15 @@
 package com.buschmais.jqassistant.plugin.graphml.report.impl;
 
-import static com.buschmais.jqassistant.plugin.graphml.report.impl.MetaInformation.getLabelsString;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
 
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
@@ -18,8 +21,11 @@ import com.buschmais.jqassistant.core.report.api.graph.model.PropertyContainer;
 import com.buschmais.jqassistant.core.report.api.graph.model.Relationship;
 import com.buschmais.jqassistant.core.report.api.graph.model.SubGraph;
 import com.buschmais.jqassistant.core.shared.reflection.ClassHelper;
-import com.buschmais.jqassistant.plugin.graphml.report.api.*;
+import com.buschmais.jqassistant.plugin.graphml.report.api.GraphMLDecorator;
+
 import com.sun.xml.txw2.output.IndentingXMLStreamWriter;
+
+import static com.buschmais.jqassistant.plugin.graphml.report.impl.MetaInformation.getLabelsString;
 
 /**
  * @author mh

@@ -7,24 +7,29 @@ import java.util.Set;
 
 import javax.xml.stream.XMLStreamException;
 
+import com.buschmais.jqassistant.core.analysis.api.Result;
+import com.buschmais.jqassistant.core.analysis.api.rule.Concept;
+import com.buschmais.jqassistant.core.analysis.api.rule.Constraint;
+import com.buschmais.jqassistant.core.analysis.api.rule.ExecutableRule;
+import com.buschmais.jqassistant.core.analysis.api.rule.Group;
+import com.buschmais.jqassistant.core.analysis.api.rule.Rule;
+import com.buschmais.jqassistant.core.report.api.ReportException;
+import com.buschmais.jqassistant.core.report.api.ReportPlugin;
 import com.buschmais.jqassistant.core.report.api.graph.SubGraphFactory;
 import com.buschmais.jqassistant.core.report.api.graph.model.SubGraph;
+import com.buschmais.jqassistant.core.shared.reflection.ClassHelper;
+import com.buschmais.jqassistant.plugin.graphml.report.api.GraphMLDecorator;
+import com.buschmais.jqassistant.plugin.graphml.report.decorator.YedGraphMLDecorator;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.buschmais.jqassistant.core.analysis.api.Result;
-import com.buschmais.jqassistant.core.analysis.api.rule.*;
-import com.buschmais.jqassistant.core.report.api.ReportException;
-import com.buschmais.jqassistant.core.report.api.ReportPlugin;
-import com.buschmais.jqassistant.core.shared.reflection.ClassHelper;
-import com.buschmais.jqassistant.plugin.graphml.report.api.*;
-import com.buschmais.jqassistant.plugin.graphml.report.decorator.YedGraphMLDecorator;
-
-
-/** A report plugin that creates GraphML files based on the results of a concept.
+/**
+ * A report plugin that creates GraphML files based on the results of a concept.
  *
  * @author mh
- * @author Dirk Mahler */
+ * @author Dirk Mahler
+ */
 public class GraphMLReportPlugin implements ReportPlugin {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GraphMLReportPlugin.class);

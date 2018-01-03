@@ -1,11 +1,11 @@
 package com.buschmais.jqassistant.plugin.graphml.report.impl;
 
-import static java.util.Arrays.asList;
-
 import java.util.HashSet;
 import java.util.Set;
 
 import com.buschmais.jqassistant.core.report.api.graph.model.Node;
+
+import static java.util.Arrays.asList;
 
 /**
  * @author mh

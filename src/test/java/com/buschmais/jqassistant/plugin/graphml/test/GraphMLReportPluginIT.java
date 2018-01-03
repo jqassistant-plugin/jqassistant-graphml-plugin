@@ -1,9 +1,5 @@
 package com.buschmais.jqassistant.plugin.graphml.test;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.junit.Assert.assertThat;
-
 import java.io.File;
 import java.io.FileReader;
 import java.lang.reflect.Method;
@@ -19,14 +15,6 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-
 import com.buschmais.jqassistant.core.analysis.api.AnalyzerConfiguration;
 import com.buschmais.jqassistant.core.analysis.impl.AnalyzerImpl;
 import com.buschmais.jqassistant.core.report.api.ReportPlugin;
@@ -35,6 +23,18 @@ import com.buschmais.jqassistant.plugin.graphml.report.impl.GraphMLReportPlugin;
 import com.buschmais.jqassistant.plugin.graphml.test.set.a.A;
 import com.buschmais.jqassistant.plugin.graphml.test.set.b.B;
 import com.buschmais.jqassistant.plugin.java.test.AbstractJavaPluginIT;
+
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.junit.Assert.assertThat;
 
 /**
  * Verifies functionality of the GraphML report plugin.

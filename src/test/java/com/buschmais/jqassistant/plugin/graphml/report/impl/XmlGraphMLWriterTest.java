@@ -1,19 +1,11 @@
 package com.buschmais.jqassistant.plugin.graphml.report.impl;
 
-import static org.mockito.Mockito.*;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.xml.stream.XMLStreamException;
-
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
 
 import com.buschmais.jqassistant.core.analysis.api.Result;
 import com.buschmais.jqassistant.core.analysis.api.rule.Concept;
@@ -25,6 +17,18 @@ import com.buschmais.jqassistant.core.shared.reflection.ClassHelper;
 import com.buschmais.jqassistant.plugin.graphml.report.api.GraphMLDecorator;
 import com.buschmais.jqassistant.plugin.graphml.report.decorator.YedGraphMLDecorator;
 import com.buschmais.jqassistant.plugin.graphml.test.CustomGraphMLDecorator;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
+
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 
 @RunWith(MockitoJUnitRunner.class)
