@@ -174,10 +174,9 @@ public class GraphMLReportPluginIT extends AbstractJavaPluginIT {
     }
 
     private Document scanAndWriteReport(String conceptName, Class<?>... scanClasses) throws Exception {
-        Map<String, ReportPlugin> reportWriters = new HashMap<>();
-        reportWriters.putAll(getReportPlugins(getReportProperties()));
+        Map<String, ReportPlugin> reportWriters = new HashMap<>(getReportPlugins(getReportProperties()));
         CompositeReportPlugin compositeReportPlugin = new CompositeReportPlugin(reportWriters);
-        this.analyzer = new AnalyzerImpl(new AnalyzerConfiguration(), this.store, compositeReportPlugin, LOGGER);
+        this.analyzer = new AnalyzerImpl(new AnalyzerConfiguration(), this.store, getRuleLanguagePlugins(), compositeReportPlugin, LOGGER);
         scanClasses(scanClasses);
         applyConcept(conceptName);
         String fileName = conceptName.replace(':', '_');
