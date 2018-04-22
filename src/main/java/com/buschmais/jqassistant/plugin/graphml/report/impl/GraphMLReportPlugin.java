@@ -9,13 +9,11 @@ import javax.xml.stream.XMLStreamException;
 
 import com.buschmais.jqassistant.core.analysis.api.Result;
 import com.buschmais.jqassistant.core.analysis.api.rule.Concept;
-import com.buschmais.jqassistant.core.analysis.api.rule.Constraint;
 import com.buschmais.jqassistant.core.analysis.api.rule.ExecutableRule;
-import com.buschmais.jqassistant.core.analysis.api.rule.Group;
 import com.buschmais.jqassistant.core.analysis.api.rule.Rule;
+import com.buschmais.jqassistant.core.report.api.AbstractReportPlugin;
 import com.buschmais.jqassistant.core.report.api.ReportContext;
 import com.buschmais.jqassistant.core.report.api.ReportException;
-import com.buschmais.jqassistant.core.report.api.ReportPlugin;
 import com.buschmais.jqassistant.core.report.api.graph.SubGraphFactory;
 import com.buschmais.jqassistant.core.report.api.graph.model.SubGraph;
 import com.buschmais.jqassistant.core.shared.reflection.ClassHelper;
@@ -31,7 +29,7 @@ import org.slf4j.LoggerFactory;
  * @author mh
  * @author Dirk Mahler
  */
-public class GraphMLReportPlugin implements ReportPlugin {
+public class GraphMLReportPlugin extends AbstractReportPlugin {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GraphMLReportPlugin.class);
 
@@ -47,10 +45,6 @@ public class GraphMLReportPlugin implements ReportPlugin {
     private String directory = "jqassistant/report";
     private SubGraphFactory subGraphFactory;
     private XmlGraphMLWriter xmlGraphMLWriter;
-
-
-    @Override
-    public void initialize() {}
 
     @Override
     public void configure(ReportContext reportContext, Map<String, Object> properties) {
@@ -71,27 +65,6 @@ public class GraphMLReportPlugin implements ReportPlugin {
     public void begin() {
         subGraphFactory = new SubGraphFactory();
     }
-
-    @Override
-    public void end() {}
-
-    @Override
-    public void beginConcept(Concept concept) {}
-
-    @Override
-    public void endConcept() {}
-
-    @Override
-    public void beginGroup(Group group) {}
-
-    @Override
-    public void endGroup() {}
-
-    @Override
-    public void beginConstraint(Constraint constraint) {}
-
-    @Override
-    public void endConstraint() {}
 
     @Override
     public void setResult(Result<? extends ExecutableRule> result) throws ReportException {
@@ -115,6 +88,4 @@ public class GraphMLReportPlugin implements ReportPlugin {
             }
         }
     }
-
-
 }
