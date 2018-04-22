@@ -13,6 +13,7 @@ import com.buschmais.jqassistant.core.analysis.api.rule.Constraint;
 import com.buschmais.jqassistant.core.analysis.api.rule.ExecutableRule;
 import com.buschmais.jqassistant.core.analysis.api.rule.Group;
 import com.buschmais.jqassistant.core.analysis.api.rule.Rule;
+import com.buschmais.jqassistant.core.report.api.ReportContext;
 import com.buschmais.jqassistant.core.report.api.ReportException;
 import com.buschmais.jqassistant.core.report.api.ReportPlugin;
 import com.buschmais.jqassistant.core.report.api.graph.SubGraphFactory;
@@ -49,10 +50,10 @@ public class GraphMLReportPlugin implements ReportPlugin {
 
 
     @Override
-    public void initialize() throws ReportException {}
+    public void initialize() {}
 
     @Override
-    public void configure(Map<String, Object> properties) throws ReportException {
+    public void configure(ReportContext reportContext, Map<String, Object> properties) {
         this.conceptPattern = getProperty(properties, CONCEPT_PATTERN, conceptPattern);
         this.directory = getProperty(properties, DIRECTORY, directory);
         String defaultDecorator = getProperty(properties, GRAPHML_DEFAULT_DECORATOR, YedGraphMLDecorator.class.getName());
@@ -61,36 +62,36 @@ public class GraphMLReportPlugin implements ReportPlugin {
         xmlGraphMLWriter = new XmlGraphMLWriter(classHelper, defaultDecoratorType, properties);
     }
 
-    private String getProperty(Map<String, Object> properties, String property, String defaultValue) throws ReportException {
+    private String getProperty(Map<String, Object> properties, String property, String defaultValue) {
         String value = (String) properties.get(property);
         return value != null ? value : defaultValue;
     }
 
     @Override
-    public void begin() throws ReportException {
+    public void begin() {
         subGraphFactory = new SubGraphFactory();
     }
 
     @Override
-    public void end() throws ReportException {}
+    public void end() {}
 
     @Override
-    public void beginConcept(Concept concept) throws ReportException {}
+    public void beginConcept(Concept concept) {}
 
     @Override
-    public void endConcept() throws ReportException {}
+    public void endConcept() {}
 
     @Override
-    public void beginGroup(Group group) throws ReportException {}
+    public void beginGroup(Group group) {}
 
     @Override
-    public void endGroup() throws ReportException {}
+    public void endGroup() {}
 
     @Override
-    public void beginConstraint(Constraint constraint) throws ReportException {}
+    public void beginConstraint(Constraint constraint) {}
 
     @Override
-    public void endConstraint() throws ReportException {}
+    public void endConstraint() {}
 
     @Override
     public void setResult(Result<? extends ExecutableRule> result) throws ReportException {
