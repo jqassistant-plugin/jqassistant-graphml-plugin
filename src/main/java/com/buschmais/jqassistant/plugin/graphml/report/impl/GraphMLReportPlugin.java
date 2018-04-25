@@ -38,18 +38,23 @@ public class GraphMLReportPlugin extends AbstractReportPlugin {
     public static final String FILEEXTENSION_GRAPHML = ".graphml";
 
     private static final String CONCEPT_PATTERN = "graphml.report.conceptPattern";
-    private static final String DIRECTORY = "graphml.report.directory";
+    private static final String GRAPHMML_REPORT_DIRECTORY = "graphml.report.directory";
     private static final String GRAPHML_DEFAULT_DECORATOR = "graphml.report.defaultDecorator";
 
     private String conceptPattern = ".*\\.graphml$";
-    private String directory = "jqassistant/report";
+    private File reportDirectory;
     private SubGraphFactory subGraphFactory;
     private XmlGraphMLWriter xmlGraphMLWriter;
 
     @Override
     public void configure(ReportContext reportContext, Map<String, Object> properties) {
         this.conceptPattern = getProperty(properties, CONCEPT_PATTERN, conceptPattern);
-        this.directory = getProperty(properties, DIRECTORY, directory);
+
+        String reportDirectoryValue = (String) properties.get(GRAPHMML_REPORT_DIRECTORY);
+        this.reportDirectory = reportDirectoryValue != null ? new File(reportDirectoryValue) : reportContext.getReportDirectory("graphml");
+        if (reportDirectory.mkdirs()) {
+            LOGGER.info("Created directory " + reportDirectory.getAbsolutePath());
+        }
         String defaultDecorator = getProperty(properties, GRAPHML_DEFAULT_DECORATOR, YedGraphMLDecorator.class.getName());
         ClassHelper classHelper = new ClassHelper(GraphMLReportPlugin.class.getClassLoader());
         Class<GraphMLDecorator> defaultDecoratorType = classHelper.getType(defaultDecorator);
@@ -77,11 +82,7 @@ public class GraphMLReportPlugin extends AbstractReportPlugin {
                 if (!fileName.endsWith(FILEEXTENSION_GRAPHML)) {
                     fileName = fileName + FILEEXTENSION_GRAPHML;
                 }
-                File directory = new File(this.directory);
-                if (directory.mkdirs()) {
-                    LOGGER.info("Created directory " + directory.getAbsolutePath());
-                }
-                File file = new File(directory, fileName);
+                File file = new File(reportDirectory, fileName);
                 xmlGraphMLWriter.write(result, subGraph, file);
             } catch (IOException | XMLStreamException e) {
                 throw new ReportException("Cannot write custom report.", e);
