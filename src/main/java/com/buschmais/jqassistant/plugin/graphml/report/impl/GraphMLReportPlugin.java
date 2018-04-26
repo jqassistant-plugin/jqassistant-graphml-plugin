@@ -41,6 +41,7 @@ public class GraphMLReportPlugin extends AbstractReportPlugin {
     private static final String GRAPHMML_REPORT_DIRECTORY = "graphml.report.directory";
     private static final String GRAPHML_DEFAULT_DECORATOR = "graphml.report.defaultDecorator";
 
+    private ReportContext reportContext;
     private String conceptPattern = ".*\\.graphml$";
     private File reportDirectory;
     private SubGraphFactory subGraphFactory;
@@ -48,6 +49,7 @@ public class GraphMLReportPlugin extends AbstractReportPlugin {
 
     @Override
     public void configure(ReportContext reportContext, Map<String, Object> properties) {
+        this.reportContext = reportContext;
         this.conceptPattern = getProperty(properties, CONCEPT_PATTERN, conceptPattern);
 
         String reportDirectoryValue = (String) properties.get(GRAPHMML_REPORT_DIRECTORY);
@@ -84,6 +86,7 @@ public class GraphMLReportPlugin extends AbstractReportPlugin {
                 }
                 File file = new File(reportDirectory, fileName);
                 xmlGraphMLWriter.write(result, subGraph, file);
+                reportContext.addReport(result.getRule(), ReportContext.ReportType.LINK, file.toURI().toURL());
             } catch (IOException | XMLStreamException e) {
                 throw new ReportException("Cannot write custom report.", e);
             }
