@@ -86,7 +86,7 @@ public class GraphMLReportPlugin extends AbstractReportPlugin {
                 }
                 File file = new File(reportDirectory, fileName);
                 xmlGraphMLWriter.write(result, subGraph, file);
-                reportContext.addReport(result.getRule(), ReportContext.ReportType.LINK, file.toURI().toURL());
+                reportContext.addReport("GraphML", result.getRule(), ReportContext.ReportType.LINK, file.toURI().toURL());
             } catch (IOException | XMLStreamException e) {
                 throw new ReportException("Cannot write custom report.", e);
             }
