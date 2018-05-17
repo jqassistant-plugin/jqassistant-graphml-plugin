@@ -14,6 +14,7 @@ import com.buschmais.jqassistant.core.analysis.api.rule.Rule;
 import com.buschmais.jqassistant.core.report.api.AbstractReportPlugin;
 import com.buschmais.jqassistant.core.report.api.ReportContext;
 import com.buschmais.jqassistant.core.report.api.ReportException;
+import com.buschmais.jqassistant.core.report.api.ReportHelper;
 import com.buschmais.jqassistant.core.report.api.ReportPlugin.Default;
 import com.buschmais.jqassistant.core.report.api.graph.SubGraphFactory;
 import com.buschmais.jqassistant.core.report.api.graph.model.SubGraph;
@@ -82,7 +83,7 @@ public class GraphMLReportPlugin extends AbstractReportPlugin {
         if ((selectedReports != null && selectedReports.contains(GRAPHML)) || (rule instanceof Concept && rule.getId().matches(conceptPattern))) {
             SubGraph subGraph = subGraphFactory.createSubGraph(result);
             try {
-                String fileName = rule.getId().replaceAll("\\:", "_");
+                String fileName = ReportHelper.escapeRuleId(rule);
                 if (!fileName.endsWith(FILEEXTENSION_GRAPHML)) {
                     fileName = fileName + FILEEXTENSION_GRAPHML;
                 }
