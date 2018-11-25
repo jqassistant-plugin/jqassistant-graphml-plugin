@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.xml.stream.XMLStreamException;
 
@@ -82,7 +83,9 @@ public class XmlGraphMLWriterTest {
 
     @Test
     public void ruleSpecificDecorator() throws IOException, XMLStreamException {
-        Report report = Report.Builder.newInstance().property("graphml.report.decorator", CustomGraphMLDecorator.class.getName()).get();
+        Properties reportProperties = new Properties();
+        reportProperties.setProperty("graphml.report.decorator", CustomGraphMLDecorator.class.getName());
+        Report report = Report.builder().properties(reportProperties).build();
         stubDecorator(report, CustomGraphMLDecorator.class);
         File file = getFile();
         Map<String, Object> properties = new HashMap<>();
@@ -96,7 +99,7 @@ public class XmlGraphMLWriterTest {
 
     @Test
     public void defaultDecorator() throws IOException, XMLStreamException {
-        Report report = Report.Builder.newInstance().get();
+        Report report = Report.builder().build();
         stubDecorator(report, YedGraphMLDecorator.class);
         File file = getFile();
         Map<String, Object> properties = new HashMap<>();
@@ -109,7 +112,7 @@ public class XmlGraphMLWriterTest {
 
     @Test
     public void decoratorFilter() throws IOException, XMLStreamException {
-        Report report = Report.Builder.newInstance().get();
+        Report report = Report.builder().build();
         YedGraphMLDecorator decorator = stubDecorator(report, YedGraphMLDecorator.class);
         when(decorator.isWriteNode(node1)).thenReturn(true);
         when(decorator.isWriteRelationship(relationship1)).thenReturn(true);
