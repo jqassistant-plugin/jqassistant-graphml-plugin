@@ -23,7 +23,7 @@ import com.buschmais.jqassistant.plugin.graphml.test.set.a.A;
 import com.buschmais.jqassistant.plugin.graphml.test.set.b.B;
 import com.buschmais.jqassistant.plugin.java.test.AbstractJavaPluginIT;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;

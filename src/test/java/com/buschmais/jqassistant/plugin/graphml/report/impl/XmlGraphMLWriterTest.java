@@ -19,11 +19,13 @@ import com.buschmais.jqassistant.plugin.graphml.report.api.GraphMLDecorator;
 import com.buschmais.jqassistant.plugin.graphml.report.decorator.YedGraphMLDecorator;
 import com.buschmais.jqassistant.plugin.graphml.test.CustomGraphMLDecorator;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+import org.mockito.quality.Strictness;
 
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
@@ -31,8 +33,8 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-
-@RunWith(MockitoJUnitRunner.class)
+@MockitoSettings(strictness = Strictness.LENIENT)
+@ExtendWith(MockitoExtension.class)
 public class XmlGraphMLWriterTest {
 
     @Mock
@@ -54,7 +56,7 @@ public class XmlGraphMLWriterTest {
 
     private SubGraph subGraph;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         when(result.getRule()).thenReturn(concept);
 
