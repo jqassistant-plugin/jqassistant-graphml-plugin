@@ -11,10 +11,7 @@ import com.buschmais.jqassistant.core.analysis.api.Result;
 import com.buschmais.jqassistant.core.analysis.api.rule.Concept;
 import com.buschmais.jqassistant.core.analysis.api.rule.ExecutableRule;
 import com.buschmais.jqassistant.core.analysis.api.rule.Rule;
-import com.buschmais.jqassistant.core.report.api.AbstractReportPlugin;
-import com.buschmais.jqassistant.core.report.api.ReportContext;
-import com.buschmais.jqassistant.core.report.api.ReportException;
-import com.buschmais.jqassistant.core.report.api.ReportHelper;
+import com.buschmais.jqassistant.core.report.api.*;
 import com.buschmais.jqassistant.core.report.api.ReportPlugin.Default;
 import com.buschmais.jqassistant.core.report.api.graph.SubGraphFactory;
 import com.buschmais.jqassistant.core.report.api.graph.model.SubGraph;
@@ -32,7 +29,7 @@ import org.slf4j.LoggerFactory;
  * @author Dirk Mahler
  */
 @Default
-public class GraphMLReportPlugin extends AbstractReportPlugin {
+public class GraphMLReportPlugin implements ReportPlugin {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GraphMLReportPlugin.class);
 
