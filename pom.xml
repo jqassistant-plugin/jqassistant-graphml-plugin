@@ -34,9 +34,9 @@
     </properties>
 
     <scm>
-        <connection>scm:git:git@github.com:buschmais/jqa-graphml-plugin.git</connection>
-        <developerConnection>scm:git:git@github.com:buschmais/jqa-graphml-plugin.git</developerConnection>
-        <url>https://github.com/buschmais/jqa-graphml-plugin</url>
+        <connection>scm:git:git@github.com:jqassistant/jqa-graphml-plugin.git</connection>
+        <developerConnection>scm:git:git@github.com:jqassistant/jqa-graphml-plugin.git</developerConnection>
+        <url>https://github.com/jqassistant/jqa-graphml-plugin</url>
       <tag>1.3</tag>
   </scm>
 
