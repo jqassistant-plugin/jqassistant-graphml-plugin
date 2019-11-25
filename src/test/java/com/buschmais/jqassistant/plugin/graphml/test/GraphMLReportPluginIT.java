@@ -13,11 +13,11 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
 import com.buschmais.jqassistant.core.analysis.api.AnalyzerConfiguration;
-import com.buschmais.jqassistant.core.analysis.api.rule.Concept;
 import com.buschmais.jqassistant.core.analysis.impl.AnalyzerImpl;
 import com.buschmais.jqassistant.core.report.api.ReportContext;
 import com.buschmais.jqassistant.core.report.api.ReportPlugin;
 import com.buschmais.jqassistant.core.report.impl.CompositeReportPlugin;
+import com.buschmais.jqassistant.core.rule.api.model.Concept;
 import com.buschmais.jqassistant.plugin.graphml.report.impl.GraphMLReportPlugin;
 import com.buschmais.jqassistant.plugin.graphml.test.set.a.A;
 import com.buschmais.jqassistant.plugin.graphml.test.set.b.B;
