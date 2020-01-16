@@ -23,7 +23,7 @@ The following concept will return package dependencies (as provided by the conce
 [source,xml]
 .reports.xml
 ----
-<jqa:jqassistant-rules xmlns:jqa="http://www.buschmais.com/jqassistant/core/analysis/rules/schema/v1.0">
+<jqa:jqassistant-rules xmlns:jqa="http://schema.jqassistant.org/rule/v1.8">
 
     <concept id="report:PackageDependencies.graphml">
         <requiresConcept refId="dependency:Package" />
@@ -53,7 +53,7 @@ store:
 [source,xml]
 .reports.xml
 ----
-<jqa:jqassistant-rules xmlns:jqa="http://www.buschmais.com/jqassistant/core/analysis/rules/schema/v1.0">
+<jqa:jqassistant-rules xmlns:jqa="http://schema.jqassistant.org/rule/v1.8">
 
     <concept id="report:VirtualPackageDependencies.graphml">
         <description>Reports all package dependencies.</description>
@@ -89,7 +89,7 @@ The following example virtually aggregates some data without creating a node in 
 [source,xml]
 .reports.xml
 ----
-<jqa:jqassistant-rules xmlns:jqa="http://www.buschmais.com/jqassistant/core/analysis/rules/schema/v1.0">
+<jqa:jqassistant-rules xmlns:jqa="http://schema.jqassistant.org/rule/v1.8">
 
     <concept id="report:VirtualDataNode.graphml">
         <description>Aggregates data in a virtual node.</description>
@@ -121,7 +121,7 @@ The following example creates a virtual subgraph:
 [source,xml]
 .reports.xml
 ----
-<jqa:jqassistant-rules xmlns:jqa="http://www.buschmais.com/jqassistant/core/analysis/rules/schema/v1.0">
+<jqa:jqassistant-rules xmlns:jqa="http://schema.jqassistant.org/rule/v1.8">
 
     <concept id="report:Subgraph.graphml">
         <description>Creates a Subgraph for a better overview.</description>
