@@ -23,7 +23,9 @@ The following concept will return package dependencies (as provided by the conce
 [source,xml]
 .reports.xml
 ----
-<jqa:jqassistant-rules xmlns:jqa="http://schema.jqassistant.org/rule/v1.8">
+<jqassistant-rules xmlns="http://schema.jqassistant.org/rule/1.8"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://schema.jqassistant.org/rule/1.8 https://schema.jqassistant.org/rule/jqassistant-rule-v1.8.xsd">
 
     <concept id="report:PackageDependencies.graphml">
         <requiresConcept refId="dependency:Package" />
@@ -36,7 +38,7 @@ The following concept will return package dependencies (as provided by the conce
         ]]></cypher>
     </concept>
 
-</jqa:jqassistant-rules>
+</jqassistant-rules>
 ----
 
 The plugin also supports virtual relations, i.e. which are constructed in the return clause of the query. 
@@ -53,7 +55,9 @@ store:
 [source,xml]
 .reports.xml
 ----
-<jqa:jqassistant-rules xmlns:jqa="http://schema.jqassistant.org/rule/v1.8">
+<jqassistant-rules xmlns="http://schema.jqassistant.org/rule/1.8"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://schema.jqassistant.org/rule/1.8 https://schema.jqassistant.org/rule/jqassistant-rule-v1.8.xsd">
 
     <concept id="report:VirtualPackageDependencies.graphml">
         <description>Reports all package dependencies.</description>
@@ -74,7 +78,7 @@ store:
         ]]></cypher>
     </concept>
 
-</jqa:jqassistant-rules>
+</jqassistant-rules>
 ----
 
 Virtual nodes will be provided in the same way like virtual relationships. These are the properties
@@ -89,7 +93,9 @@ The following example virtually aggregates some data without creating a node in 
 [source,xml]
 .reports.xml
 ----
-<jqa:jqassistant-rules xmlns:jqa="http://schema.jqassistant.org/rule/v1.8">
+<jqassistant-rules xmlns="http://schema.jqassistant.org/rule/1.8"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://schema.jqassistant.org/rule/1.8 https://schema.jqassistant.org/rule/jqassistant-rule-v1.8.xsd">
 
     <concept id="report:VirtualDataNode.graphml">
         <description>Aggregates data in a virtual node.</description>
@@ -105,7 +111,7 @@ The following example virtually aggregates some data without creating a node in 
         ]]></cypher>
     </concept>
 
-</jqa:jqassistant-rules>
+</jqassistant-rules>
 ----
 
 To get a better structured GraphML file subgraphs can be generated. With this pattern it is possible
@@ -121,7 +127,9 @@ The following example creates a virtual subgraph:
 [source,xml]
 .reports.xml
 ----
-<jqa:jqassistant-rules xmlns:jqa="http://schema.jqassistant.org/rule/v1.8">
+<jqassistant-rules xmlns="http://schema.jqassistant.org/rule/1.8"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://schema.jqassistant.org/rule/1.8 https://schema.jqassistant.org/rule/jqassistant-rule-v1.8.xsd">
 
     <concept id="report:Subgraph.graphml">
         <description>Creates a Subgraph for a better overview.</description>
@@ -140,6 +148,6 @@ The following example creates a virtual subgraph:
 		]]></cypher>
     </concept>
 
-</jqa:jqassistant-rules>
+</jqassistant-rules>
 ----
 <1> The relationships can be used overall subgraphs
