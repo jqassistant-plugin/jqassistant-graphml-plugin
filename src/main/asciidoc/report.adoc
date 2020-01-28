@@ -23,9 +23,9 @@ The following concept will return package dependencies (as provided by the conce
 [source,xml]
 .reports.xml
 ----
-<jqassistant-rules xmlns="http://schema.jqassistant.org/rule/1.8"
+<jqassistant-rules xmlns="http://schema.jqassistant.org/rule/v1.8"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://schema.jqassistant.org/rule/1.8 https://schema.jqassistant.org/rule/jqassistant-rule-v1.8.xsd">
+                   xsi:schemaLocation="http://schema.jqassistant.org/rule/v1.8 https://schema.jqassistant.org/rule/jqassistant-rule-v1.8.xsd">
 
     <concept id="report:PackageDependencies.graphml">
         <requiresConcept refId="dependency:Package" />
@@ -55,9 +55,9 @@ store:
 [source,xml]
 .reports.xml
 ----
-<jqassistant-rules xmlns="http://schema.jqassistant.org/rule/1.8"
+<jqassistant-rules xmlns="http://schema.jqassistant.org/rule/v1.8"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://schema.jqassistant.org/rule/1.8 https://schema.jqassistant.org/rule/jqassistant-rule-v1.8.xsd">
+                   xsi:schemaLocation="http://schema.jqassistant.org/rule/v1.8 https://schema.jqassistant.org/rule/jqassistant-rule-v1.8.xsd">
 
     <concept id="report:VirtualPackageDependencies.graphml">
         <description>Reports all package dependencies.</description>
@@ -93,9 +93,9 @@ The following example virtually aggregates some data without creating a node in 
 [source,xml]
 .reports.xml
 ----
-<jqassistant-rules xmlns="http://schema.jqassistant.org/rule/1.8"
+<jqassistant-rules xmlns="http://schema.jqassistant.org/rule/v1.8"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://schema.jqassistant.org/rule/1.8 https://schema.jqassistant.org/rule/jqassistant-rule-v1.8.xsd">
+                   xsi:schemaLocation="http://schema.jqassistant.org/rule/v1.8 https://schema.jqassistant.org/rule/jqassistant-rule-v1.8.xsd">
 
     <concept id="report:VirtualDataNode.graphml">
         <description>Aggregates data in a virtual node.</description>
@@ -127,9 +127,9 @@ The following example creates a virtual subgraph:
 [source,xml]
 .reports.xml
 ----
-<jqassistant-rules xmlns="http://schema.jqassistant.org/rule/1.8"
+<jqassistant-rules xmlns="http://schema.jqassistant.org/rule/v1.8"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://schema.jqassistant.org/rule/1.8 https://schema.jqassistant.org/rule/jqassistant-rule-v1.8.xsd">
+                   xsi:schemaLocation="http://schema.jqassistant.org/rule/v1.8 https://schema.jqassistant.org/rule/jqassistant-rule-v1.8.xsd">
 
     <concept id="report:Subgraph.graphml">
         <description>Creates a Subgraph for a better overview.</description>
