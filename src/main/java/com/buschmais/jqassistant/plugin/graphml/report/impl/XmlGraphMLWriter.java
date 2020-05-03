@@ -23,8 +23,6 @@ import com.buschmais.jqassistant.core.report.api.model.Result;
 import com.buschmais.jqassistant.core.shared.reflection.ClassHelper;
 import com.buschmais.jqassistant.plugin.graphml.report.api.GraphMLDecorator;
 
-import com.sun.xml.txw2.output.IndentingXMLStreamWriter;
-
 import static com.buschmais.jqassistant.plugin.graphml.report.impl.MetaInformation.getLabelsString;
 
 /**
@@ -59,7 +57,7 @@ class XmlGraphMLWriter {
     void write(Result<?> result, SubGraph graph, File file) throws IOException, XMLStreamException {
         try (PrintWriter writer = new PrintWriter(new FileWriter(file));
              GraphMLDecorator decorator = getGraphMLDecorator(result)) {
-            XMLStreamWriter xmlWriter = new IndentingXMLStreamWriter(xmlOutputFactory.createXMLStreamWriter(writer));
+            XMLStreamWriter xmlWriter = xmlOutputFactory.createXMLStreamWriter(writer);
             decorator.initialize(result, graph, xmlWriter, file, properties);
             GraphMLNamespaceContext context = new GraphMLNamespaceContext(decorator.getNamespaces(), decorator.getSchemaLocations());
             xmlWriter.setNamespaceContext(context);
