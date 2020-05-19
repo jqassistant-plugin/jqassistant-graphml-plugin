@@ -4,13 +4,13 @@
     <parent>
         <groupId>com.buschmais.jqassistant.plugin</groupId>
         <artifactId>parent</artifactId>
-        <version>1.9.0-ALPHA1</version>
+        <version>1.9.0-SNAPSHOT</version>
         <relativePath/>
     </parent>
 
     <groupId>com.buschmais.jqassistant.plugin</groupId>
     <artifactId>graphml</artifactId>
-    <version>1.9.0-ALPHA1</version>
+    <version>1.9.0-SNAPSHOT</version>
 
     <name>jQAssistant GraphML Plugin</name>
     <url>http://jqassistant.org/</url>
@@ -29,8 +29,8 @@
     </licenses>
 
     <properties>
-        <jqa-plugin-common.version>1.9.0-ALPHA1</jqa-plugin-common.version>
-        <jqa-java-plugin.version>1.9.0-ALPHA1</jqa-java-plugin.version>
+        <jqa-plugin-common.version>1.9.0-SNAPSHOT</jqa-plugin-common.version>
+        <jqa-java-plugin.version>1.9.0-SNAPSHOT</jqa-java-plugin.version>
     </properties>
 
     <scm>
