@@ -20,6 +20,10 @@
         GraphML diagrams.
     </description>
 
+    <organization>
+        <name>jQAssistant Development Team</name>
+        <url>https://jqassistant.org</url>
+    </organization>
 
     <licenses>
         <license>
