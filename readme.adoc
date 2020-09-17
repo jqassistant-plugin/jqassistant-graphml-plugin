@@ -1,7 +1,5 @@
 = jQAssistant GraphML Plugin
 
-image::https://github.com/jQAssistant/jqa-graphml-plugin/workflows/jQA%20Standard%20CI%20Build/badge.svg[jQA Standard CI Build]
-
 This is the http://graphml.graphdrawing.org/[GraphML^] Plugin of https://www.jqassistant.org[jQAssistant^].
 It enables jQAssistant to generate GraphML XML files for result data of concepts.
 Those files can be used with several graph rendering
