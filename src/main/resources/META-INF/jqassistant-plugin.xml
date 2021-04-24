@@ -1,6 +1,9 @@
-<v1:jqassistant-plugin xmlns:v1="http://www.buschmais.com/jqassistant/core/plugin/schema/v1.4" name="GraphML">
+<jpd:jqassistant-plugin xmlns:jpd="http://schema.jqassistant.org/plugin/v1.10"
+                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                        xsi:schemaLocation="http://schema.jqassistant.org/plugin/v1.10 https://schema.jqassistant.org/plugin/jqassistant-plugin-v1.10.xsd"
+                        name="GraphML" id="jqa.plugin.graphml">
     <description>Provides a report plugin for generating GraphML files from the results of concepts.</description>
     <report>
         <class id="graphml">com.buschmais.jqassistant.plugin.graphml.report.impl.GraphMLReportPlugin</class>
     </report>
-</v1:jqassistant-plugin>
+</jpd:jqassistant-plugin>
