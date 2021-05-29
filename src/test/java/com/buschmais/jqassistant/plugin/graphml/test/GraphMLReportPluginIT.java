@@ -30,8 +30,8 @@ import org.xml.sax.InputSource;
 import static com.buschmais.jqassistant.core.report.api.ReportContext.ReportType.LINK;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
-import static org.junit.Assert.assertThat;
 
 /**
  * Verifies functionality of the GraphML report plugin.
