@@ -35,7 +35,7 @@ import static org.mockito.Mockito.when;
 
 @MockitoSettings(strictness = Strictness.LENIENT)
 @ExtendWith(MockitoExtension.class)
-public class XmlGraphMLWriterTest {
+class XmlGraphMLWriterTest {
 
     @Mock
     private ClassHelper classHelper;
@@ -57,7 +57,7 @@ public class XmlGraphMLWriterTest {
     private SubGraph subGraph;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         when(result.getRule()).thenReturn(concept);
 
         node1 = new Node();
@@ -84,7 +84,7 @@ public class XmlGraphMLWriterTest {
     }
 
     @Test
-    public void ruleSpecificDecorator() throws IOException, XMLStreamException {
+    void ruleSpecificDecorator() throws IOException, XMLStreamException {
         Properties reportProperties = new Properties();
         reportProperties.setProperty("graphml.report.decorator", CustomGraphMLDecorator.class.getName());
         Report report = Report.builder().properties(reportProperties).build();
@@ -100,7 +100,7 @@ public class XmlGraphMLWriterTest {
     }
 
     @Test
-    public void defaultDecorator() throws IOException, XMLStreamException {
+    void defaultDecorator() throws IOException, XMLStreamException {
         Report report = Report.builder().build();
         stubDecorator(report, YedGraphMLDecorator.class);
         File file = getFile();
@@ -113,7 +113,7 @@ public class XmlGraphMLWriterTest {
     }
 
     @Test
-    public void decoratorFilter() throws IOException, XMLStreamException {
+    void decoratorFilter() throws IOException, XMLStreamException {
         Report report = Report.builder().build();
         YedGraphMLDecorator decorator = stubDecorator(report, YedGraphMLDecorator.class);
         when(decorator.isWriteNode(node1)).thenReturn(true);

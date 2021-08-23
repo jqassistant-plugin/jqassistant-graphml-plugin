@@ -36,7 +36,7 @@ import static org.hamcrest.Matchers.greaterThan;
 /**
  * Verifies functionality of the GraphML report plugin.
  */
-public class GraphMLReportPluginIT extends AbstractJavaPluginIT {
+class GraphMLReportPluginIT extends AbstractJavaPluginIT {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GraphMLReportPlugin.class);
 
@@ -67,22 +67,22 @@ public class GraphMLReportPluginIT extends AbstractJavaPluginIT {
     }
 
     @Test
-    public void renderGraphML() throws Exception {
+    void renderGraphML() throws Exception {
         reportAndVerify("test:DeclaredMembers.graphml", 4);
     }
 
     @Test
-    public void renderGraphMLUsingReportType() throws Exception {
+    void renderGraphMLUsingReportType() throws Exception {
         reportAndVerify("test:DeclaredMembers", 4);
     }
 
     @Test
-    public void renderGraphMLUsingVirtualRelation() throws Exception {
+    void renderGraphMLUsingVirtualRelation() throws Exception {
         reportAndVerify("test:DeclaredMembersWithVirtualRelation.graphml", 4);
     }
 
     @Test
-    public void renderGraphMLUsingSubgraph() throws Exception {
+    void renderGraphMLUsingSubgraph() throws Exception {
         Document doc = scanAndWriteReport("test:DeclaredMembersWithSubgraph.graphml", A.class, B.class);
         XPathFactory xPathfactory = XPathFactory.newInstance();
         XPath xpath = xPathfactory.newXPath();
@@ -127,7 +127,7 @@ public class GraphMLReportPluginIT extends AbstractJavaPluginIT {
     }
 
     @Test
-    public void renderGraphMLUsingVirtualNode() throws Exception {
+    void renderGraphMLUsingVirtualNode() throws Exception {
         Document doc = scanAndWriteReport("test:DeclaredMembersWithVirtualNode.graphml", TestClass.class);
 
         XPathFactory xPathfactory = XPathFactory.newInstance();
@@ -140,7 +140,7 @@ public class GraphMLReportPluginIT extends AbstractJavaPluginIT {
     }
 
     @Test
-    public void uniqueElementsPerSubGraph() throws Exception {
+    void uniqueElementsPerSubGraph() throws Exception {
         Document doc = scanAndWriteReport("test:RedundantNodesAndRelations.graphml", TestClass.class);
         XPathFactory xPathfactory = XPathFactory.newInstance();
         XPath xpath = xPathfactory.newXPath();
