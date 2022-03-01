@@ -35,8 +35,7 @@ import static org.hamcrest.Matchers.greaterThan;
 
 /**
  * Verifies functionality of the GraphML report plugin.
- */
-class GraphMLReportPluginIT extends AbstractJavaPluginIT {
+ */class GraphMLReportPluginIT extends AbstractJavaPluginIT {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GraphMLReportPlugin.class);
 
