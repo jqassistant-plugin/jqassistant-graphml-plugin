@@ -4,6 +4,6 @@
                     name="jQAssistant GraphML Plugin" id="jqa.plugin.graphml">
     <description>Provides a report plugin for generating GraphML files from the results of concepts.</description>
     <report>
-        <class id="graphml">com.buschmais.jqassistant.plugin.graphml.report.impl.GraphMLReportPlugin</class>
+        <class id="graphml">org.jqassistant.plugin.graphml.report.impl.GraphMLReportPlugin</class>
     </report>
 </jqassistant-plugin>

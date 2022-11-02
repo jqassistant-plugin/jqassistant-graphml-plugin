@@ -1,4 +1,4 @@
-package com.buschmais.jqassistant.plugin.graphml.test;
+package org.jqassistant.plugin.graphml.test;
 
 import java.io.File;
 import java.util.Map;
@@ -10,8 +10,8 @@ import com.buschmais.jqassistant.core.report.api.graph.model.Node;
 import com.buschmais.jqassistant.core.report.api.graph.model.Relationship;
 import com.buschmais.jqassistant.core.report.api.graph.model.SubGraph;
 import com.buschmais.jqassistant.core.report.api.model.Result;
-import com.buschmais.jqassistant.plugin.graphml.report.api.GraphMLDecorator;
-import com.buschmais.jqassistant.plugin.graphml.report.decorator.YedGraphMLDecorator;
+import org.jqassistant.plugin.graphml.report.api.GraphMLDecorator;
+import org.jqassistant.plugin.graphml.report.decorator.YedGraphMLDecorator;
 
 public class CustomGraphMLDecorator implements GraphMLDecorator {
 

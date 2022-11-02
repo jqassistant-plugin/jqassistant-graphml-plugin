@@ -1,5 +1,5 @@
-<jqa:jqassistant-rules
-        xmlns:jqa="http://www.buschmais.com/jqassistant/core/analysis/rules/schema/v1.1">
+<jqassistant-rules
+    xmlns="http://schema.jqassistant.org/rule/v1.10">
 
     <concept id="test:DeclaredMembers.graphml">
         <description>A type and its declarations</description>
@@ -53,7 +53,7 @@
            	MATCH
 				(m:Method)
 			RETURN
-				{role: "node", properties: {totalCyclomaticComplexity : sum(m.cyclomaticComplexity)}, labels: ["Metrics", "CyclomaticComplexity"] } 
+				{role: "node", properties: {totalCyclomaticComplexity : sum(m.cyclomaticComplexity)}, labels: ["Metrics", "CyclomaticComplexity"] }
         ]]></cypher>
     </concept>
 
@@ -66,4 +66,4 @@
 			  t as t1, t as t2, d as d1, d as d2, c as c1, c as c2
         ]]></cypher>
     </concept>
-</jqa:jqassistant-rules>
+</jqassistant-rules>

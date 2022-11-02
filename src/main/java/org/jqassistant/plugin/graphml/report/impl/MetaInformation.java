@@ -1,4 +1,4 @@
-package com.buschmais.jqassistant.plugin.graphml.report.impl;
+package org.jqassistant.plugin.graphml.report.impl;
 
 import java.util.HashSet;
 import java.util.Set;

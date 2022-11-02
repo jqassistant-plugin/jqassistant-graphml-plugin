@@ -1,4 +1,4 @@
-package com.buschmais.jqassistant.plugin.graphml.test;
+package org.jqassistant.plugin.graphml.test;
 
 import java.io.File;
 import java.io.FileReader;
@@ -14,11 +14,11 @@ import javax.xml.xpath.XPathFactory;
 
 import com.buschmais.jqassistant.core.report.api.ReportContext;
 import com.buschmais.jqassistant.core.rule.api.model.Concept;
-import com.buschmais.jqassistant.plugin.graphml.report.impl.GraphMLReportPlugin;
-import com.buschmais.jqassistant.plugin.graphml.test.set.a.A;
-import com.buschmais.jqassistant.plugin.graphml.test.set.b.B;
 import com.buschmais.jqassistant.plugin.java.test.AbstractJavaPluginIT;
 
+import org.jqassistant.plugin.graphml.report.impl.GraphMLReportPlugin;
+import org.jqassistant.plugin.graphml.test.set.a.A;
+import org.jqassistant.plugin.graphml.test.set.b.B;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -108,7 +108,9 @@ import static org.hamcrest.Matchers.greaterThan;
             Set<String> expectedMethods = new HashSet<>();
             expectedMethods.add("<init>");
             for (Method method : expectedClass.getDeclaredMethods()) {
-                expectedMethods.add(method.getName());
+                if (!method.isSynthetic()) { // to ignor $jacocoInit in maven build
+                    expectedMethods.add(method.getName());
+                }
             }
             NodeList methods = (NodeList) methodExpression.evaluate(classNode, XPathConstants.NODESET);
             int methodCount = methods.getLength();

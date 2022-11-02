@@ -1,4 +1,4 @@
-package com.buschmais.jqassistant.plugin.graphml.report.impl;
+package org.jqassistant.plugin.graphml.report.impl;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -21,9 +21,9 @@ import com.buschmais.jqassistant.core.report.api.graph.model.Relationship;
 import com.buschmais.jqassistant.core.report.api.graph.model.SubGraph;
 import com.buschmais.jqassistant.core.report.api.model.Result;
 import com.buschmais.jqassistant.core.shared.reflection.ClassHelper;
-import com.buschmais.jqassistant.plugin.graphml.report.api.GraphMLDecorator;
+import org.jqassistant.plugin.graphml.report.api.GraphMLDecorator;
 
-import static com.buschmais.jqassistant.plugin.graphml.report.impl.MetaInformation.getLabelsString;
+import static org.jqassistant.plugin.graphml.report.impl.MetaInformation.getLabelsString;
 
 /**
  * @author mh

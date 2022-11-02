@@ -1,4 +1,4 @@
-package com.buschmais.jqassistant.plugin.graphml.report.impl;
+package org.jqassistant.plugin.graphml.report.impl;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,8 +19,8 @@ import com.buschmais.jqassistant.core.rule.api.model.Concept;
 import com.buschmais.jqassistant.core.rule.api.model.ExecutableRule;
 import com.buschmais.jqassistant.core.rule.api.model.Rule;
 import com.buschmais.jqassistant.core.shared.reflection.ClassHelper;
-import com.buschmais.jqassistant.plugin.graphml.report.api.GraphMLDecorator;
-import com.buschmais.jqassistant.plugin.graphml.report.decorator.YedGraphMLDecorator;
+import org.jqassistant.plugin.graphml.report.api.GraphMLDecorator;
+import org.jqassistant.plugin.graphml.report.decorator.YedGraphMLDecorator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

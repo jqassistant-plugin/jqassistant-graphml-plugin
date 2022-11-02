@@ -1,4 +1,4 @@
-package com.buschmais.jqassistant.plugin.graphml.report.decorator;
+package org.jqassistant.plugin.graphml.report.decorator;
 
 import java.io.File;
 import java.util.HashMap;
@@ -11,7 +11,7 @@ import com.buschmais.jqassistant.core.report.api.graph.model.Node;
 import com.buschmais.jqassistant.core.report.api.graph.model.Relationship;
 import com.buschmais.jqassistant.core.report.api.graph.model.SubGraph;
 import com.buschmais.jqassistant.core.report.api.model.Result;
-import com.buschmais.jqassistant.plugin.graphml.report.api.GraphMLDecorator;
+import org.jqassistant.plugin.graphml.report.api.GraphMLDecorator;
 
 /**
  * A GraphML decorator for yEd.

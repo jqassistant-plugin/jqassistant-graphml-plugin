@@ -1,4 +1,4 @@
-package com.buschmais.jqassistant.plugin.graphml.report.api;
+package org.jqassistant.plugin.graphml.report.api;
 
 import java.io.Closeable;
 import java.io.File;

@@ -1,6 +1,6 @@
-package com.buschmais.jqassistant.plugin.graphml.test.set.a;
+package org.jqassistant.plugin.graphml.test.set.a;
 
-import com.buschmais.jqassistant.plugin.graphml.test.set.b.B;
+import org.jqassistant.plugin.graphml.test.set.b.B;
 
 public class A {
 
