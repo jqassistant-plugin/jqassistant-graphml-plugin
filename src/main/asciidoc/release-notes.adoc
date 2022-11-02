@@ -1,6 +1,9 @@
 
 = GraphML Plugin
 
+== 2.0.0
+Moved Plugin from com.buschmais.jqassistant.plugin (core-Distribution) to org.jqassistant.plugin
+
 == 1.3
 
 * Added support for nested sub graphs
