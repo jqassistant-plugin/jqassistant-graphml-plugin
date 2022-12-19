@@ -45,8 +45,8 @@
     </developers>
 
     <properties>
-        <jqa-plugin-common.version>1.13.0-SNAPSHOT</jqa-plugin-common.version>
-        <jqa-java-plugin.version>1.13.0-SNAPSHOT</jqa-java-plugin.version>
+        <jqa-plugin-common.version>2.0.0-M1</jqa-plugin-common.version>
+        <jqa-java-plugin.version>2.0.0-M1</jqa-java-plugin.version>
     </properties>
 
     <scm>
@@ -67,8 +67,8 @@
             <artifactId>report</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.buschmais.jqassistant.neo4jserver</groupId>
-            <artifactId>neo4jv3</artifactId>
+            <groupId>com.buschmais.jqassistant.neo4j</groupId>
+            <artifactId>embedded</artifactId>
         </dependency>
         <dependency>
             <groupId>com.buschmais.jqassistant.core</groupId>
