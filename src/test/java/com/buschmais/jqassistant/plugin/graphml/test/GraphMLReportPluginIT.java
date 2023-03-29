@@ -14,20 +14,18 @@ import javax.xml.xpath.XPathFactory;
 
 import com.buschmais.jqassistant.core.report.api.ReportContext;
 import com.buschmais.jqassistant.core.rule.api.model.Concept;
-import com.buschmais.jqassistant.plugin.graphml.report.impl.GraphMLReportPlugin;
 import com.buschmais.jqassistant.plugin.graphml.test.set.a.A;
 import com.buschmais.jqassistant.plugin.graphml.test.set.b.B;
 import com.buschmais.jqassistant.plugin.java.test.AbstractJavaPluginIT;
 
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 import static com.buschmais.jqassistant.core.report.api.ReportContext.ReportType.LINK;
+import static com.buschmais.jqassistant.plugin.graphml.report.impl.GraphMLReportPlugin.FILEEXTENSION_GRAPHML;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -36,8 +34,6 @@ import static org.hamcrest.Matchers.greaterThan;
 /**
  * Verifies functionality of the GraphML report plugin.
  */class GraphMLReportPluginIT extends AbstractJavaPluginIT {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(GraphMLReportPlugin.class);
 
     private static final String REPORT_DIR = "target/graphml";
 
@@ -67,22 +63,17 @@ import static org.hamcrest.Matchers.greaterThan;
 
     @Test
     void renderGraphML() throws Exception {
-        reportAndVerify("test:DeclaredMembers.graphml", 4);
-    }
-
-    @Test
-    void renderGraphMLUsingReportType() throws Exception {
         reportAndVerify("test:DeclaredMembers", 4);
     }
 
     @Test
     void renderGraphMLUsingVirtualRelation() throws Exception {
-        reportAndVerify("test:DeclaredMembersWithVirtualRelation.graphml", 4);
+        reportAndVerify("test:DeclaredMembersWithVirtualRelation", 4);
     }
 
     @Test
     void renderGraphMLUsingSubgraph() throws Exception {
-        Document doc = scanAndWriteReport("test:DeclaredMembersWithSubgraph.graphml", A.class, B.class);
+        Document doc = scanAndWriteReport("test:DeclaredMembersWithSubgraph", A.class, B.class);
         XPathFactory xPathfactory = XPathFactory.newInstance();
         XPath xpath = xPathfactory.newXPath();
         // XPathExpression classExpression =
@@ -127,7 +118,7 @@ import static org.hamcrest.Matchers.greaterThan;
 
     @Test
     void renderGraphMLUsingVirtualNode() throws Exception {
-        Document doc = scanAndWriteReport("test:DeclaredMembersWithVirtualNode.graphml", TestClass.class);
+        Document doc = scanAndWriteReport("test:DeclaredMembersWithVirtualNode", TestClass.class);
 
         XPathFactory xPathfactory = XPathFactory.newInstance();
         XPath xpath = xPathfactory.newXPath();
@@ -140,7 +131,7 @@ import static org.hamcrest.Matchers.greaterThan;
 
     @Test
     void uniqueElementsPerSubGraph() throws Exception {
-        Document doc = scanAndWriteReport("test:RedundantNodesAndRelations.graphml", TestClass.class);
+        Document doc = scanAndWriteReport("test:RedundantNodesAndRelations", TestClass.class);
         XPathFactory xPathfactory = XPathFactory.newInstance();
         XPath xpath = xPathfactory.newXPath();
         NodeList classNodes = (NodeList) xpath.compile("/graphml/graph/node[contains(@labels,':Class')]").evaluate(doc, XPathConstants.NODESET);
@@ -173,10 +164,7 @@ import static org.hamcrest.Matchers.greaterThan;
     private Document scanAndWriteReport(String conceptName, Class<?>... scanClasses) throws Exception {
         scanClasses(scanClasses);
         applyConcept(conceptName);
-        String fileName = conceptName.replace(':', '_');
-        if (!conceptName.endsWith(GraphMLReportPlugin.FILEEXTENSION_GRAPHML)) {
-            fileName = fileName + GraphMLReportPlugin.FILEEXTENSION_GRAPHML;
-        }
+        String fileName = conceptName.replace(':', '_') + FILEEXTENSION_GRAPHML;
         File reportFile = new File(REPORT_DIR, fileName);
         assertThat(reportFile.exists(), equalTo(true));
 
