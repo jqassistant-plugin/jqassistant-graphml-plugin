@@ -34,7 +34,6 @@ public class GraphMLReportPlugin implements ReportPlugin {
 
     public static final String FILEEXTENSION_GRAPHML = ".graphml";
 
-    private static final String CONCEPT_PATTERN = "graphml.report.conceptPattern";
     private static final String GRAPHMML_REPORT_DIRECTORY = "graphml.report.directory";
     private static final String GRAPHML_DEFAULT_DECORATOR = "graphml.report.defaultDecorator";
 
