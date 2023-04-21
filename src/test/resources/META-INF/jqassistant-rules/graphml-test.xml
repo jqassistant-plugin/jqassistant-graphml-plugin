@@ -1,16 +1,6 @@
 <jqassistant-rules
     xmlns="http://schema.jqassistant.org/rule/v1.10">
 
-    <concept id="test:DeclaredMembers.graphml">
-        <description>A type and its declarations</description>
-        <cypher><![CDATA[
-            MATCH
-              (t:Class)-[r:DECLARES]->(m)
-            RETURN
-              t, r as rel, m
-        ]]></cypher>
-    </concept>
-
     <concept id="test:DeclaredMembers">
         <description>A type and its declarations</description>
         <cypher><![CDATA[
@@ -22,7 +12,7 @@
         <report type="graphml"/>
     </concept>
 
-    <concept id="test:DeclaredMembersWithVirtualRelation.graphml">
+    <concept id="test:DeclaredMembersWithVirtualRelation">
         <description>A type and its declarations</description>
         <cypher><![CDATA[
             MATCH
@@ -30,9 +20,10 @@
             RETURN
               t, {role: "relationship", type:"DECLARES", startNode:startNode(r), endNode:endNode(r), properties: { name : m.name }} as rel, m
         ]]></cypher>
+        <report type="graphml"/>
     </concept>
 
-    <concept id="test:DeclaredMembersWithSubgraph.graphml">
+    <concept id="test:DeclaredMembersWithSubgraph">
         <description>A type with methods as subgraph</description>
         <cypher><![CDATA[
 			MATCH
@@ -45,9 +36,10 @@
 			RETURN
 			  {role: "graph", parent: t, nodes: methods, relationships: invocations} as subgraph
          ]]></cypher>
+        <report type="graphml"/>
     </concept>
 
-    <concept id="test:DeclaredMembersWithVirtualNode.graphml">
+    <concept id="test:DeclaredMembersWithVirtualNode">
         <description>A type with methods as subgraph</description>
         <cypher><![CDATA[
            	MATCH
@@ -55,9 +47,10 @@
 			RETURN
 				{role: "node", properties: {totalCyclomaticComplexity : sum(m.cyclomaticComplexity)}, labels: ["Metrics", "CyclomaticComplexity"] }
         ]]></cypher>
+        <report type="graphml"/>
     </concept>
 
-    <concept id="test:RedundantNodesAndRelations.graphml">
+    <concept id="test:RedundantNodesAndRelations">
         <description>A type with methods as subgraph</description>
         <cypher><![CDATA[
            	MATCH
@@ -65,5 +58,6 @@
 			RETURN
 			  t as t1, t as t2, d as d1, d as d2, c as c1, c as c2
         ]]></cypher>
+        <report type="graphml"/>
     </concept>
 </jqassistant-rules>
