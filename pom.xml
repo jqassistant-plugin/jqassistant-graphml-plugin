@@ -2,13 +2,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.buschmais.jqassistant.plugin</groupId>
+        <groupId>org.jqassistant.plugin</groupId>
         <artifactId>parent</artifactId>
-        <version>2.0.0-M2</version>
+        <version>2.0.0</version>
         <relativePath/>
     </parent>
 
-    <artifactId>graphml</artifactId>
+    <artifactId>jqassistant-graphml-plugin</artifactId>
     <version>2.0.0-SNAPSHOT</version>
 
     <name>jQAssistant GraphML Plugin</name>
@@ -31,15 +31,28 @@
         </license>
     </licenses>
 
+    <developers>
+        <developer>
+            <id>dirk-mahler</id>
+            <name>Dirk Mahler</name>
+            <email>dirk.mahler@buschmais.com</email>
+        </developer>
+        <developer>
+            <id>stephan.pirnbaum</id>
+            <name>Stephan Pirnbaum</name>
+            <email>stephan.pirnbaum@buschmais.com</email>
+        </developer>
+    </developers>
+
     <properties>
-        <jqa-plugin-common.version>2.0.0-RC2</jqa-plugin-common.version>
-        <jqa-java-plugin.version>2.0.0-RC2</jqa-java-plugin.version>
+        <jqa-plugin-common.version>2.0.0</jqa-plugin-common.version>
+        <jqa-java-plugin.version>2.0.0</jqa-java-plugin.version>
     </properties>
 
     <scm>
-        <connection>scm:git:git@github.com:jqassistant/jqa-graphml-plugin.git</connection>
-        <developerConnection>scm:git:git@github.com:jqassistant/jqa-graphml-plugin.git</developerConnection>
-        <url>https://github.com/jqassistant/jqa-graphml-plugin</url>
+        <connection>scm:git:https://github.com/jqassistant-plugin/jqassistant-graphml-plugin.git</connection>
+        <developerConnection>scm:git:https://github.com/jqassistant-plugin/jqassistant-graphml-plugin.git</developerConnection>
+        <url>https://github.com/jqassistant-plugin/jqassistant-graphml-plugin</url>
       <tag>1.3</tag>
   </scm>
 
@@ -49,6 +62,14 @@
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>com.buschmais.jqassistant.core</groupId>
+            <artifactId>report</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.buschmais.jqassistant.neo4j</groupId>
+            <artifactId>embedded</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.buschmais.jqassistant.core</groupId>
             <artifactId>test</artifactId>
@@ -111,14 +132,4 @@
         </dependency>
     </dependencies>
 
-    <repositories>
-        <repository>
-            <id>sonatype-nexus-snapshots</id>
-            <name>Sonatype Nexus Snapshots</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 </project>
