@@ -37,8 +37,6 @@ import static org.hamcrest.Matchers.greaterThan;
  * Verifies functionality of the GraphML report plugin.
  */class GraphMLReportPluginIT extends AbstractJavaPluginIT {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(GraphMLReportPlugin.class);
-
     private static final String REPORT_DIR = "target/graphml";
 
     static class TestClass {
@@ -67,22 +65,17 @@ import static org.hamcrest.Matchers.greaterThan;
 
     @Test
     void renderGraphML() throws Exception {
-        reportAndVerify("test:DeclaredMembers.graphml", 4);
-    }
-
-    @Test
-    void renderGraphMLUsingReportType() throws Exception {
         reportAndVerify("test:DeclaredMembers", 4);
     }
 
     @Test
     void renderGraphMLUsingVirtualRelation() throws Exception {
-        reportAndVerify("test:DeclaredMembersWithVirtualRelation.graphml", 4);
+        reportAndVerify("test:DeclaredMembersWithVirtualRelation", 4);
     }
 
     @Test
     void renderGraphMLUsingSubgraph() throws Exception {
-        Document doc = scanAndWriteReport("test:DeclaredMembersWithSubgraph.graphml", A.class, B.class);
+        Document doc = scanAndWriteReport("test:DeclaredMembersWithSubgraph", A.class, B.class);
         XPathFactory xPathfactory = XPathFactory.newInstance();
         XPath xpath = xPathfactory.newXPath();
         // XPathExpression classExpression =
@@ -129,7 +122,7 @@ import static org.hamcrest.Matchers.greaterThan;
 
     @Test
     void renderGraphMLUsingVirtualNode() throws Exception {
-        Document doc = scanAndWriteReport("test:DeclaredMembersWithVirtualNode.graphml", TestClass.class);
+        Document doc = scanAndWriteReport("test:DeclaredMembersWithVirtualNode", TestClass.class);
 
         XPathFactory xPathfactory = XPathFactory.newInstance();
         XPath xpath = xPathfactory.newXPath();
@@ -142,7 +135,7 @@ import static org.hamcrest.Matchers.greaterThan;
 
     @Test
     void uniqueElementsPerSubGraph() throws Exception {
-        Document doc = scanAndWriteReport("test:RedundantNodesAndRelations.graphml", TestClass.class);
+        Document doc = scanAndWriteReport("test:RedundantNodesAndRelations", TestClass.class);
         XPathFactory xPathfactory = XPathFactory.newInstance();
         XPath xpath = xPathfactory.newXPath();
         NodeList classNodes = (NodeList) xpath.compile("/graphml/graph/node[contains(@labels,':Class')]").evaluate(doc, XPathConstants.NODESET);
