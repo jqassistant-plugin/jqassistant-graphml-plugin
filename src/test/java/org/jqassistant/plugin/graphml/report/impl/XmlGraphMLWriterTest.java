@@ -27,6 +27,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
 
+import static java.util.Collections.emptyMap;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
@@ -76,11 +78,22 @@ class XmlGraphMLWriterTest {
         relationship2.setStartNode(node2);
         relationship2.setEndNode(node2);
 
+        SubGraph level2SubGraph = new SubGraph();
+        level2SubGraph.getNodes()
+            .put(node1.getId(), node1);
+        level2SubGraph.getNodes()
+            .put(node2.getId(), node2);
+        level2SubGraph.getRelationships()
+            .put(relationship1.getId(), relationship1);
+        level2SubGraph.getRelationships()
+            .put(relationship2.getId(), relationship2);
+
+        SubGraph level1SubGraph = new SubGraph();
+        level1SubGraph.getSubGraphs().put(2L, level2SubGraph);
+
         subGraph = new SubGraph();
-        subGraph.getNodes().put(node1.getId(), node1);
-        subGraph.getNodes().put(node2.getId(), node2);
-        subGraph.getRelationships().put(relationship1.getId(), relationship1);
-        subGraph.getRelationships().put(relationship2.getId(), relationship2);
+        subGraph.getSubGraphs()
+            .put(1L, level1SubGraph);
     }
 
     @Test
@@ -113,6 +126,33 @@ class XmlGraphMLWriterTest {
     }
 
     @Test
+    void allElements() throws IOException, XMLStreamException {
+        Report report = Report.builder()
+            .build();
+        YedGraphMLDecorator decorator = stubDecorator(report, YedGraphMLDecorator.class);
+        when(decorator.isWriteNode(any(Node.class))).thenReturn(true);
+        when(decorator.isWriteRelationship(any(Relationship.class))).thenReturn(true);
+        File file = getFile();
+        XmlGraphMLWriter writer = new XmlGraphMLWriter(classHelper, YedGraphMLDecorator.class, emptyMap());
+
+        writer.write(result, subGraph, file);
+
+        verify(decorator).isWriteNode(node1);
+        verify(decorator).writeNodeAttributes(node1);
+        verify(decorator).writeNodeElements(node1);
+        verify(decorator).isWriteRelationship(relationship1);
+        verify(decorator).writeRelationshipAttributes(relationship1);
+        verify(decorator).writeRelationshipElements(relationship1);
+
+        verify(decorator).isWriteNode(node2);
+        verify(decorator).writeNodeAttributes(node2);
+        verify(decorator).writeNodeElements(node2);
+        verify(decorator).isWriteRelationship(relationship2);
+        verify(decorator).writeRelationshipAttributes(relationship2);
+        verify(decorator).writeRelationshipElements(relationship2);
+    }
+
+    @Test
     void decoratorFilter() throws IOException, XMLStreamException {
         Report report = Report.builder().build();
         YedGraphMLDecorator decorator = stubDecorator(report, YedGraphMLDecorator.class);
@@ -121,8 +161,7 @@ class XmlGraphMLWriterTest {
         when(decorator.isWriteNode(node2)).thenReturn(false);
         when(decorator.isWriteRelationship(relationship2)).thenReturn(false);
         File file = getFile();
-        Map<String, Object> properties = new HashMap<>();
-        XmlGraphMLWriter writer = new XmlGraphMLWriter(classHelper, YedGraphMLDecorator.class, properties);
+        XmlGraphMLWriter writer = new XmlGraphMLWriter(classHelper, YedGraphMLDecorator.class, emptyMap());
 
         writer.write(result, subGraph, file);
 
