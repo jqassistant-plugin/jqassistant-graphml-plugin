@@ -58,7 +58,7 @@ class XmlGraphMLWriterTest {
 
     @BeforeEach
     void setUp() {
-        when(result.getRule()).thenReturn(concept);
+        doReturn(concept).when(result).getRule();
 
         node1 = new Node();
         node1.setId(1);

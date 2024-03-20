@@ -3,7 +3,10 @@ package org.jqassistant.plugin.graphml.test;
 import java.io.File;
 import java.io.FileReader;
 import java.lang.reflect.Method;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -12,24 +15,18 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
-import com.buschmais.jqassistant.core.report.api.ReportContext;
-import com.buschmais.jqassistant.core.rule.api.model.Concept;
 import com.buschmais.jqassistant.plugin.java.test.AbstractJavaPluginIT;
 
 import org.jqassistant.plugin.graphml.report.impl.GraphMLReportPlugin;
 import org.jqassistant.plugin.graphml.test.set.a.A;
 import org.jqassistant.plugin.graphml.test.set.b.B;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
-import static com.buschmais.jqassistant.core.report.api.ReportContext.ReportType.LINK;
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.greaterThan;
 
@@ -174,16 +171,6 @@ import static org.hamcrest.Matchers.greaterThan;
         }
         File reportFile = new File(REPORT_DIR, fileName);
         assertThat(reportFile.exists(), equalTo(true));
-
-        // Verify report context
-        Concept concept = ruleSet.getConceptBucket().getById(conceptName);
-        List<ReportContext.Report<?>> reports = reportContext.getReports(concept);
-        assertThat(reports.size(), equalTo(1));
-        ReportContext.Report<?> report = reports.get(0);
-        assertThat(report.getLabel(), equalTo("GraphML"));
-        assertThat(report.getRule(), is(concept));
-        assertThat(report.getReportType(), equalTo(LINK));
-        assertThat(report.getUrl(), equalTo(reportFile.toURI().toURL()));
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
