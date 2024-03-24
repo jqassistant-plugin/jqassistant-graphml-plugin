@@ -72,12 +72,12 @@ import static org.hamcrest.Matchers.greaterThan;
 
     @Test
     void renderGraphMLUsingSubgraph() throws Exception {
-        Document doc = scanAndWriteReport("test:DeclaredMembersWithSubgraph", A.class, B.class);
+        Document doc = scanAndWriteReport("test:ArtifactsWithTypesAndMembersAsNestedSubGraphs", A.class, B.class);
         XPathFactory xPathfactory = XPathFactory.newInstance();
         XPath xpath = xPathfactory.newXPath();
         // XPathExpression classExpression =
         // xpath.compile("/graphml/graph/node[contains(@labels,':Class')]/data[@key='fqn']");
-        XPathExpression classExpression = xpath.compile("/graphml/graph/node[contains(@labels,':Class')]");
+        XPathExpression classExpression = xpath.compile("/graphml/graph/node/graph/node[contains(@labels,':Class')]");
         XPathExpression methodExpression = xpath.compile("graph/node[contains(@labels,':Method')]");
         XPathExpression fqnExpression = xpath.compile("data[@key='fqn']");
         XPathExpression nameExpression = xpath.compile("data[@key='name']");
@@ -93,7 +93,7 @@ import static org.hamcrest.Matchers.greaterThan;
             Node classNode = classes.item(i);
             Node classNameNode = (Node) fqnExpression.evaluate(classNode, XPathConstants.NODE);
             String className = classNameNode.getTextContent();
-            assertThat("Expecting class in report.", expectedClasses.keySet().contains(className), equalTo(true));
+            assertThat("Expecting class in report.", expectedClasses.containsKey(className), equalTo(true));
             Class<?> expectedClass = expectedClasses.get(className);
             Set<String> expectedMethods = new HashSet<>();
             expectedMethods.add("<init>");

@@ -7,7 +7,7 @@ and analytics tools like http://www.yworks.com/en/products/yfiles/yed/[yEd^] and
 
 For more information on jQAssistant see https://jqassistant.org[^].
 
-== Using the jqassistant-graphml-plugin
+== Setup & Configuration
 
 NOTE:: Starting from jqassistant-graphml-plugin v2.0.0, the GraphML-Plugin resides under jqassistant-plugin.
 Therefore, not only the repository location changed but also group id and artifact id were adapted from `com.buschmais.jqassistant.plugin:graphml` to `org.jqassistant.plugin:jqassistant-graphml-plugin`.
@@ -21,5 +21,186 @@ jqassistant:
     - group-id: org.jqassistant.plugin
       artifact-id: jqassistant-graphml-plugin
       version: ${jqassistant.graphml-plugin.version}
+  analyze:
+    report:
+      properties:
+
 ----
 <1> Dependency to the GraphmL plugin
+
+.Configuration properties
+[options="header"]
+|====
+| Property     			          | Description														                        | Default
+| graphml.report.directory        | The directory where the .graphml files will be created                                  | jqassistant/report
+| graphml.report.defaultDecorator | Flag to enable/disable the generation of viewer specific GraphML-Elements for labeling. | org.jqassistant.plugin.graphml.report.decorator.YedGraphMLDecorator
+|====
+
+== Examples
+
+The following concept will return package dependencies (as provided by the concept `java:PackageDependency`) as GraphML document:
+
+[source,xml]
+.reports.xml
+----
+<jqassistant-rules xmlns="http://schema.jqassistant.org/rule/v1.8"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://schema.jqassistant.org/rule/v1.8 https://schema.jqassistant.org/rule/jqassistant-rule-v1.8.xsd">
+
+    <concept id="report:PackageDependencies">
+        <requiresConcept refId="java:PackageDependency" />
+        <description>Reports all package dependencies.</description>
+        <cypher><![CDATA[
+            MATCH
+              (p1:Package)-[d:DEPENDS_ON]->(p2:Package)
+            RETURN
+              p1, d, p2
+        ]]></cypher>
+        <report type="graphml" />
+    </concept>
+
+</jqassistant-rules>
+----
+
+The plugin also supports virtual relations, i.e. which are constructed in the return clause of the query.
+A part of the return clause constructs a JSON-Object with several properties:
+
+role:: to identify the type of virtual element (value: relationship)
+type:: relationship type
+startNode:: the start node of the relationship
+endNode:: the end node of the relationship
+
+The following example virtually propagates the dependencies of Java types to the package level without creating a relationship in the
+store:
+
+[source,xml]
+.reports.xml
+----
+<jqassistant-rules xmlns="http://schema.jqassistant.org/rule/v1.8"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://schema.jqassistant.org/rule/v1.8 https://schema.jqassistant.org/rule/jqassistant-rule-v1.8.xsd">
+
+    <concept id="report:VirtualPackageDependencies">
+        <description>Reports all package dependencies.</description>
+        <cypher><![CDATA[
+            MATCH
+              (p1:Package)-[:CONTAINS]->(t1:Type),
+              (p2:Package)-[:CONTAINS]->(t2:Type),
+              (t1)-[:DEPENDS_ON]->(t2)
+            RETURN
+              p1,
+              {
+                role: "relationship",
+                type: "DEPENDS_ON",
+                startNode: p1,
+                endNode: p2
+              },
+              p2
+        ]]></cypher>
+        <report type="graphml" />
+    </concept>
+
+</jqassistant-rules>
+----
+
+Virtual nodes will be provided in the same way like virtual relationships. These are the properties
+to use in the JSON-Object:
+
+role:: to identify the type of virtual element (value: node)
+properties:: node properties
+labels:: a list of labels for this node
+
+The following example virtually aggregates some data without creating a node in the store:
+
+[source,xml]
+.reports.xml
+----
+<jqassistant-rules xmlns="http://schema.jqassistant.org/rule/v1.8"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://schema.jqassistant.org/rule/v1.8 https://schema.jqassistant.org/rule/jqassistant-rule-v1.8.xsd">
+
+    <concept id="report:VirtualDataNode">
+        <description>Aggregates data in a virtual node.</description>
+        <cypher><![CDATA[
+            MATCH
+              (m:Method)
+            RETURN
+              {
+                role: "node",
+                properties: {totalCyclomaticComplexity : sum(m.cyclomaticComplexity)},
+                labels: ["Metrics", "CyclomaticComplexity"]
+              }
+        ]]></cypher>
+        <report type="graphml" />
+    </concept>
+
+</jqassistant-rules>
+----
+
+To get a better structured GraphML file nested graphs can be generated. With this pattern it is possible
+to drill down in the graph. These are the properties to use in the JSON object:
+
+role:: to identify the type of virtual element (value: graph)
+parent:: nested graphs must be assigned to a parent node
+nodes:: all nodes that will be included in the nested graph
+relationships:: a list of relationships for the nodes. The relationships will be drawn if start- and end-node are part of the GraphML file.
+
+The following example creates a virtual graph:
+
+[source,xml]
+.reports.xml
+----
+<jqassistant-rules xmlns="http://schema.jqassistant.org/rule/v1.8"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://schema.jqassistant.org/rule/v1.8 https://schema.jqassistant.org/rule/jqassistant-rule-v1.8.xsd">
+
+    <concept id="report:Graph">
+        <description>Creates a graph for a better overview.</description>
+        <cypher><![CDATA[
+            MATCH
+              (t:Class)-[:DECLARES]->(m:Method)
+            OPTIONAL MATCH
+              (m)-[i:INVOKES]->(:Method)
+            RETURN
+              {
+                role: "graph",
+                parent: t,
+                nodes: collect(m),
+                relationships: collect(i)  //<1>
+              } as subgraph
+		]]></cypher>
+        <report type="graphml" />
+    </concept>
+
+</jqassistant-rules>
+----
+<1> The relationships can be used overall subgraphs
+
+Graphs may be nested within other graphs as well:
+
+[source,xml]
+.reports.xml
+----
+<jqassistant-rules xmlns="http://schema.jqassistant.org/rule/v1.8"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://schema.jqassistant.org/rule/v1.8 https://schema.jqassistant.org/rule/jqassistant-rule-v1.8.xsd">
+
+    <concept id="report:NestedGraph">
+        <description>Creates nested graphs.</description>
+        <cypher><![CDATA[
+			MATCH
+			  (a:Artifact)-[:CONTAINS]->(t:Class)-[:DECLARES]->(m:Method)
+			OPTIONAL MATCH
+			  (m)-[i:INVOKES]->(:Method)
+			WITH
+			  a, t, collect(m) as methods, collect(i) as invocations
+			WITH
+			  a, collect({ role: "graph", parent: t, nodes: methods, relationships: invocations }) as typesPerArtifact
+			RETURN
+			  {role: "graph", parent: a, nodes: typesPerArtifact}
+		]]></cypher>
+        <report type="graphml" />
+    </concept>
+
+</jqassistant-rules>
+----
