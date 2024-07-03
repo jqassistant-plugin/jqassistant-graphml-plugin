@@ -204,3 +204,19 @@ Graphs may be nested within other graphs as well:
 
 </jqassistant-rules>
 ----
+
+== Changelog
+
+=== 2.0.0
+Moved Plugin from com.buschmais.jqassistant.plugin (core-Distribution) to org.jqassistant.plugin
+
+=== 1.3
+
+- Added support for nested sub graphs
+- Refactoring of internal graph representation to enable compatibility with newer Neo4j versions
+
+=== 1.2
+
+- Maven coordinates changed from `com.buschmais.jqassistant.plugin:jqassistant.plugin.graphml`
+  to `com.buschmais.jqassistant.plugin:graphml`.
+- Fixed a bug where sub graphs have not been evaluated properly.
