@@ -17,9 +17,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: jqassistant-tooling/jqassistant-github-actions
-          path: jqassistant-github-actions
-          sparse-checkout: .github/release-drafter.yml
-          sparse-checkout-cone-mode: false
+          path: .github/release-drafter.yml
       - name: Display Checked Out Files
         run: ls -R .github/release-drafter.yml
       - name: Release Drafter
