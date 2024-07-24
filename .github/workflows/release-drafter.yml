@@ -16,7 +16,7 @@ jobs:
       - name: Checkout Shared Config
         uses: actions/checkout@v4
         with:
-          repository: jqassistant-tooling/jqassistant-github-actions
+          repository: jqassistant-tooling/jqassistant-github-actions/.github/release-drafter.yml@main
           path: .github/release-drafter.yml
       - name: Display Checked Out Files
         run: ls -R .github/release-drafter.yml
