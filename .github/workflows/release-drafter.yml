@@ -13,16 +13,18 @@ jobs:
   update_release_draft:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
       - name: Checkout Shared Config
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: jqassistant-tooling/jqassistant-github-actions
-          path: .github/release-drafter
+          path: jqassistant-github-actions
+          sparse-checkout: .github/release-drafter.yml
+          sparse-checkout-cone-mode: false
+      - name: Display Checked Out Files
+        run: -R
       - name: Release Drafter
         uses: release-drafter/release-drafter@v5
         with:
-          config-name: release-drafter/.github/release-drafter.yml
+          config-name: release-drafter
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
