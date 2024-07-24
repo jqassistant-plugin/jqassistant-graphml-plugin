@@ -18,7 +18,11 @@ jobs:
         with:
           repository: jqassistant-tooling/jqassistant-github-actions
           ref: main
-          path: .github/
+          path: release-drafter.yml
+          sparse-checkout: |
+            .github/release-drafter.yml
+          sparse-checkout-cone-mode: false
+          token: ${{ secrets.GITHUB_TOKEN }}
       - name: Display Checked Out Files
         run: ls -R .github/
       - name: Release Drafter
