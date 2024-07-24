@@ -32,6 +32,6 @@ jobs:
       - name: Set up Release Drafter
         uses: release-drafter/release-drafter@v5
         with:
-          config-file: config
+          config-name: config
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
