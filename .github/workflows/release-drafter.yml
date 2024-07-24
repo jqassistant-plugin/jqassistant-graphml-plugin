@@ -12,5 +12,5 @@ on:
 jobs:
   update_release_draft:
     uses: jqassistant-tooling/jqassistant-github-actions/.github/workflows/release-drafter.yml@main
-    with:
+    secrets:
       github_token: ${{ secrets.GITHUB_TOKEN }}
