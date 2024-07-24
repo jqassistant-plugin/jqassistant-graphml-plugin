@@ -1,5 +1,5 @@
 
-name: Release tests
+name: Release Drafter
 
 on:
   push:
@@ -18,7 +18,7 @@ jobs:
         with:
           repository: jqassistant-tooling/jqassistant-github-actions
           ref: main
-          path: release-drafter.yml
+          path: .github/release-drafter.yml
           sparse-checkout: |
             .github/release-drafter.yml
           sparse-checkout-cone-mode: false
@@ -27,7 +27,5 @@ jobs:
         run: ls -R release-drafter.yml
       - name: Release Drafter
         uses: release-drafter/release-drafter@v5
-        with:
-          config-name: release-drafter
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
