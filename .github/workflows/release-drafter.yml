@@ -5,32 +5,12 @@ on:
   push:
     branches:
       - master
-      - main
   pull_request:
-    types: [ opened, reopened, synchronize ]
-
-permissions:
-  contents: read
+    types: [opened, reopened, synchronize]
+  workflow_dispatch: {}
 
 jobs:
   update_release_draft:
-    if: contains(fromJSON('["buschmais", "jqassistant-plugin", "jqassistant-tooling", "jQAssistant"]'), github.repository_owner)
-    permissions:
-      contents: write
-      pull-requests: write
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      - name: Fetch Release Drafter Config
-        run: |
-          mkdir -p .github
-          curl -o config https://raw.githubusercontent.com/jqassistant-tooling/jqassistant-github-actions/.github/release-drafter.yml@main
-      - name: Set up Release Drafter
-        uses: release-drafter/release-drafter@v5
-        with:
-          config-name: config
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    uses: jqassistant-tooling/jqassistant-github-actions/.github/workflows/release-drafter.yml@main
+    with:
+      github_token: ${{ secrets.GITHUB_TOKEN }}
