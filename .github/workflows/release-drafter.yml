@@ -25,9 +25,9 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Commit report
         run: |
-          git config --global user.name '${GITHUB_ACTOR}'
-          git config --global user.email '${<EMAIL>}'
-          git commit -am ".github/release-drafter.yml"
+          git config user.name '${GITHUB_ACTOR}'
+          git config user.email '${<EMAIL>}'
+          git add ".github/release-drafter.yml"
           git push
       - name: Display Checked Out Files
         run: ls -l
