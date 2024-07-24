@@ -18,7 +18,7 @@ jobs:
         with:
           repository: jqassistant-tooling/jqassistant-github-actions
           ref: main
-          path: .github/release-drafter.yml
+          path: .github/
       - name: Display Checked Out Files
         run: ls -R .github/
       - name: Release Drafter
