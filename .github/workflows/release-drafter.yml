@@ -21,7 +21,7 @@ jobs:
           sparse-checkout: .github/release-drafter.yml
           sparse-checkout-cone-mode: false
       - name: Display Checked Out Files
-        run: -R
+        run: ls
       - name: Release Drafter
         uses: release-drafter/release-drafter@v5
         with:
