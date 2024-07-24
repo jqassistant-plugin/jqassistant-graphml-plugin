@@ -13,22 +13,11 @@ jobs:
   update_release_draft:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Shared Config
-        uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
         with:
-          repository: jqassistant-tooling/jqassistant-github-actions
-          ref: main
           path: .github/release-drafter.yml
-          sparse-checkout: |
-            .github/release-drafter.yml
-          sparse-checkout-cone-mode: false
-          token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Commit report
-        run: |
-          git config user.name ${GITHUB_ACTOR}
-          git config user.email ${<EMAIL>}
-          git add ".github/release-drafter.yml"
-          git push
+          name: my-other-artifact#
+          repository: jqassistant-tooling/jqassistant-github-actions/.github/release-drafter.yml@main
       - name: Display Checked Out Files
         run: ls -l
       - name: Release Drafter
