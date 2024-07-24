@@ -21,9 +21,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Set up Release Drafter
-      uses: release-drafter/release-drafter@v5
-      with:
-        config-file: .jqassistant-tooling/jqassistant-github-actions/.github/release-drafter.yml@main
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Fetch Release Drafter Config
+        run: |
+          mkdir -p .github
+          curl -o config https://raw.githubusercontent.com/jqassistant-tooling/jqassistant-github-actions/main/.github/release-drafter.yml
+
+      - name: Set up Release Drafter
+        uses: release-drafter/release-drafter@v5
+        with:
+          config-file: config
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
