@@ -16,11 +16,11 @@ jobs:
       - name: Checkout Shared Config
         uses: actions/checkout@v4
         with:
-          sparse-checkout: |
-            jqassistant-tooling/jqassistant-github-actions/.github/release-drafter.yml@main
-          sparse-checkout-cone-mode: false
+          repository: jqassistant-tooling/jqassistant-github-actions
+          ref: main
+          path: .github/release-drafter.yml
       - name: Display Checked Out Files
-        run: ls -R info/
+        run: ls -R .github/
       - name: Release Drafter
         uses: release-drafter/release-drafter@v5
         with:
