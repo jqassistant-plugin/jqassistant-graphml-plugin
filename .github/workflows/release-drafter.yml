@@ -20,7 +20,7 @@ jobs:
             jqassistant-tooling/jqassistant-github-actions/.github/release-drafter.yml@main
           sparse-checkout-cone-mode: false
       - name: Display Checked Out Files
-        run: ls -R .github/release-drafter.yml
+        run: ls -R info/
       - name: Release Drafter
         uses: release-drafter/release-drafter@v5
         with:
