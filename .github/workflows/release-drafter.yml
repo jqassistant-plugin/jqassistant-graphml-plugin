@@ -1,5 +1,5 @@
 
-name: Release Drafter
+name: Release tests
 
 on:
   push:
@@ -24,7 +24,7 @@ jobs:
           sparse-checkout-cone-mode: false
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Display Checked Out Files
-        run: ls -R .github/
+        run: ls -R release-drafter.yml
       - name: Release Drafter
         uses: release-drafter/release-drafter@v5
         with:
