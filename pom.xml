@@ -14,8 +14,7 @@
     <url>https://jqassistant.org/</url>
 
     <description>
-        Plugin for jQAssistant to be able to generate
-        GraphML diagrams.
+        The jQAssistant report plugin enabling to generate GraphML files from results of concepts.
     </description>
 
     <organization>
