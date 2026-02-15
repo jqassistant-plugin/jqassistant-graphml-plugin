@@ -47,7 +47,7 @@
     </scm>
 
     <properties>
-        <sonar.projectKey>jqassistant-plugin_jqassistant-plugin-graphml</sonar.projectKey>
+        <sonar.projectKey>jqassistant-plugin_jqassistant-graphml-plugin</sonar.projectKey>
     </properties>
 
     <dependencies>
