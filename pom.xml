@@ -39,22 +39,16 @@
         </developer>
     </developers>
 
-    <properties>
-        <jqa-plugin-common.version>2.0.0</jqa-plugin-common.version>
-        <jqa-java-plugin.version>2.0.0</jqa-java-plugin.version>
-    </properties>
-
     <scm>
         <connection>scm:git:https://github.com/jqassistant-plugin/jqassistant-graphml-plugin.git</connection>
         <developerConnection>scm:git:https://github.com/jqassistant-plugin/jqassistant-graphml-plugin.git</developerConnection>
         <url>https://github.com/jqassistant-plugin/jqassistant-graphml-plugin</url>
       <tag>2.0.0</tag>
-  </scm>
+    </scm>
 
-    <build>
-        <plugins>
-        </plugins>
-    </build>
+    <properties>
+        <sonar.projectKey>jqassistant-plugin_jqassistant-plugin-graphml</sonar.projectKey>
+    </properties>
 
     <dependencies>
         <dependency>
