@@ -9,12 +9,10 @@ For more information on jQAssistant see https://jqassistant.org[^].
 
 == Setup & Configuration
 
-NOTE:: Starting from jqassistant-graphml-plugin v2.0.0, the GraphML-Plugin resides under jqassistant-plugin.
-Therefore, not only the repository location changed but also group id and artifact id were adapted from `com.buschmais.jqassistant.plugin:graphml` to `org.jqassistant.plugin:jqassistant-graphml-plugin`.
-
-NOTE:: From jQAssistant v2.0.0 onwards, it is not part of the core distribution anymore and a manual configuration as shown below is required.
+The plugin must be declared in the jQAssistant configuration:
 
 [source, yaml]
+..jqassistant.yml
 ----
 jqassistant:
   plugins:
@@ -24,9 +22,8 @@ jqassistant:
   analyze:
     report:
       properties:
-
+        # additional properties, see below
 ----
-<1> Dependency to the GraphmL plugin
 
 .Configuration properties
 [options="header"]
